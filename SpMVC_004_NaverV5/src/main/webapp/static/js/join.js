@@ -7,6 +7,72 @@ document.addEventListener("DOMContentLoaded", () => {
   const nickname = document.querySelector("#nickname");
   const btn_join = document.querySelector("#btn-join");
 
+  const div_index = {
+    username: 0,
+    password: 1,
+    re_password: 2,
+    email: 3,
+    name: 4,
+    nicknamne: 5,
+  };
+
+  const error_divs = document.querySelectorAll("div.error");
+
+  //화면이 모두 그려지면 usenrname input box를 포커싱하기
+  username.focus();
+
+  /*
+    input box에서 포커스가 벗어났을때 발샐하는 이벤트
+    focusout은 이벤트 버블링이 심하게 발생하기때문에
+    JS코드에서는 주로 blur를 사용한다
+
+  */
+  const username_div = error_divs[div_index.username];
+
+  username?.addEventListener("blur", (e) => {
+    const current = e.currentTarget;
+    if (current.value === "") {
+      username_div.innerText = " * USERNAME은 반드시 입력세요";
+      username_div.classList.remove("w3-text-blue");
+      username_div.classList.add("w3-text-red");
+
+      current.focus();
+      return false;
+    }
+    //중복검사 수행
+    fetch(`${rootPath}/user/idcheck/${current.value}`)
+      .then((res) => res.text())
+      .then((result) => {
+        if (result === "OK") {
+          username_div.classList.remove("w3-text-red");
+          username_div.classList.add("w3-text-blue");
+          username_div.innerText = " * 사용가능한 USERNAME 입니다";
+        } else {
+          username_div.classList.remove("w3-text-blue");
+          username_div.classList.add("w3-text-red");
+          username_div.innerText = " * 이미 가입된 USERNAME 입니다";
+          username.focus();
+        }
+      }); // end username 이벤트
+  });
+
+  password?.addEventListener("input", (e) => {
+    const current = e.currentTarget;
+    const error = error_divs[div_index.password];
+    if (!passRole2.test(current.value)) {
+      error.classList.remove("w3-text-blue");
+      error.classList.add("w3-text-red");
+      error.innerText =
+        " * 비밀번호가 규칙에 맞지 않습니다(특수, 영문, 숫자 포함 8 ~ 15)";
+    } else {
+      error.classList.remove("w3-text-red");
+      error.classList.add("w3-text-blue");
+      error.innerText = " 확인되었습니다";
+    }
+  });
+
+  re_password?.addEventListener("input", (e) => {});
+
   btn_join?.addEventListener("click", () => {
     if (username.value === "") {
       alert("USER NAME은 반드시 입력하세요");

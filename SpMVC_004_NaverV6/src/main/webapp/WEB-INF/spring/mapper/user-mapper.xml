@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- 
+  namespace : Dao 인터페이스와 연결하여 
+  	mybatis 로 하여금 클래스를 작성하도록 하기 위한 설정 
+  -->
+ <mapper namespace="com.callor.naver.persistance.UserDao">
+ 
+ 	<select id="selectAll" resultType="UserVO">
+ 		SELECT * FROM tbl_users
+ 	</select>
+ 	<select id="findById" resultType="UserVO">
+ 		SELECT * FROM tbl_users
+ 		WHERE username = #{username}
+ 	</select>
+ 	<select id="findByName" resultType="UserVO">
+ 		SELECT * FROM tbl_users
+ 		WHERE name = #{name}
+ 	</select>
+ 	<select id="findByNickName" resultType="UserVO">
+ 		SELECT * FROM tbl_users
+ 		WHERE nickname = #{nickname}
+ 	</select>
+ 	<select id="findByEmail" resultType="UserVO">
+ 		SELECT * FROM tbl_users
+ 		WHERE email = #{email}
+ 	</select>
+ 	<!-- 이클립스, sts 대문자를 소문자로 : ctrl + shift + y -->
+ 	<!-- 소문자 대문자로 : ctrl + shift + x -->
+ 	<insert id="insert" parameterType="UserVO">
+ 		INSERT INTO tbl_users(
+ 		   		username,	
+		        password,		
+		        email,	
+		        name,	
+		        nickname,			
+		        role
+		  ) VALUES (      
+		        #{username},	
+		        #{password},	
+		        #{email},
+		        #{name},	
+		        #{nickname},			
+		        #{role}
+		 )      
+		  				
+ 	</insert>
+ 	
+ 	<!-- 
+ 	mybatis 연동한 INSERT,UPDATE 수행에서
+ 	부적절한 열유형 1111 오류가 발생하는 경우
+ 	
+ 	보통 form 에서 전체 데이터를 추가하지 않고
+ 	일부만 입력된 상태로 INSERT 에게 전달되는 경우 발생한다
+ 	
+ 	이 문제를 발생하지 않도록 하기 위하여
+ 	각 변수에 jdbcType=VARCHAR 키워드를 추가해 둔다
+ 	
+ 	이 키워드를 추가해 두면
+ 	데이터가 모두 준비되지 않은 상태로 INSERT 가 성공하게 되어
+ 	테스트를 완전하게 수행하지 못할수 도 있다
+ 	
+ 	 -->
+ 	<update id="update" parameterType="UserVO">
+ 		UPDATE tbl_users SET
+ 				username = #{username},	
+		        password = #{password},		
+		        email = #{email},	
+		        name = #{name},	
+		        nickname = #{nickname},			
+		        role = #{role}
+		WHERE username = #{username}
+ 	</update>
+ 	<delete id="delete">
+ 		DELETE FROM tbl_users WHERE username = #{username}
+ 	</delete>
+ 
+ 	<!-- MySQL Create 명령문 -->
+ 	<!-- 만약 tbl_books table 이 없으면 table 을 생성하라 -->
+ 	<!-- CREATE TABLE IF NOT EXISTS tbl_books  -->
+ 	<select id="create_user_table">
+	 	CREATE TABLE tbl_users (
+		        username	VARCHAR2(20)		PRIMARY KEY,
+		        password	VARCHAR2(125)		NOT NULL,	
+		        email		VARCHAR2(125)		NOT NULL UNIQUE,
+		        name		nVARCHAR2(125),
+		        nickname	nVARCHAR2(125),		
+		        role		VARCHAR2(5)
+		)
+ 	</select>
+ 
+ 
+ 
+ 
+ </mapper> 
