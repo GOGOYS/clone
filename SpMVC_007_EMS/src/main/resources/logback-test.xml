@@ -9,7 +9,7 @@
     </appender>
 
     <logger name="org.springframework" level="INFO" />
-    <logger name="com.callor.app" level="DEBUG"  additivity="false">
+    <logger name="com.callor.ems" level="DEBUG"  additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
