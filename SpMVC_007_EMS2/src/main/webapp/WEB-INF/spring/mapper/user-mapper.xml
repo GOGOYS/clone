@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  
+  	mapper namespace에 설정된 Dao와 mybatis-context.xml에 설정된 scan,mapper location 값들을
+  	참조하여 mybatis가 Dao인터페이스를 impl하여 실제 DB와 연결하는 코드 생성
+  	
+  	Service에서 Dao의 method를 호출하면
+  	mybatis가 생성해둔 실제 작동되는 코드가 실행되어 Db와 관련된 연산을 수행한다.
+  -->
+ <mapper namespace="com.callor.ems.pesistance.UserDao">
+ 
+ 	<select id="selectAll"></select>
+ 	<select id="findById" resultType="UserVO">
+ 		SELECT * FROM tbl_users WHERE username = #{username}
+ 	</select>
+ 	
+ 	<!-- mysql의 inset or update 코드
+ 		인서트시 문제가 생기면 업데이트를 해라 -->
+ 	<insert id="insert">
+ 		INSERT INTO tbl_users(
+ 			username,
+ 			password,
+ 			email,
+ 			name,
+ 			role
+ 		) VALUES(
+ 			#{username},
+ 			#{password},
+ 			#{email},
+ 			#{name},
+ 			#{role}
+ 		) ON DUPLICATE KEY UPDATE
+ 			username = #{username},
+ 			password = #{password},
+ 			email = #{email},
+ 			name = #{name},
+ 			role = #{role}
+ 	</insert>
+ 	<update id="update"></update>
+ 	<delete id="delete"></delete>
+ 	
+ 	<select id="create_user_table">
+	 		
+	 	CREATE TABLE IF NOT EXISTS tbl_users (
+	 		username VARCHAR(125) PRIMARY KEY,
+	 		password VARCHAR(125) NOT NULL,
+	 		name VARCHAR(50),
+	 		email VARCHAR(125),
+	 		role VARCHAR(10)	
+		)
+	 	
+ 	</select>
+ 
+ </mapper> 
