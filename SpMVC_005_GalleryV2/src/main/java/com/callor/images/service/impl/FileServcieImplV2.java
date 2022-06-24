@@ -65,7 +65,7 @@ public class FileServcieImplV2 implements FileUpService{
 	public List<FilesVO> filesUp(MultipartHttpServletRequest files) throws Exception {
 		
 		
-		//업로드 된 여러개의 파일정보 list에 암기
+		//업로드 된 여러개의 파일정보 list에 담기
 		List<FilesVO> retFiles = new ArrayList<>();
 		
 		//DB insert하기 위한 리스트를 만들기 위하여 생성

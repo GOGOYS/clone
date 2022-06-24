@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.callor.app.persistance.MemoDao">
+ 
+ 	<select id="selectAll" resultType="MemoVO">
+ 		SELECT * FROM tbl_memo;
+ 	</select>
+ 	<select id="findById" resultType="MemoVO">
+ 		SELECT * FROM tbl_memo WHERE m_seq = #{m_seq};
+ 	</select>
+ 	<insert id="insert" parameterType="MemoVO">
+ 		INSERT INTO tbl_memo(
+ 			m_seq,
+	 		m_author,
+	 		m_date,
+	 		m_time,
+	 		m_memo,
+	 		m_image
+ 		) VALUES (
+ 			#{m_seq},
+	 		#{m_author},
+	 		#{m_date},
+	 		#{m_time},
+	 		#{m_memo},
+	 		#{m_image}
+ 		)
+ 		
+ 	</insert>
+ 	<update id="update" >
+ 		UPDATE tbl_memo SET
+		        m_author = #{m_author},	
+		        m_date = #{m_date},	
+		        m_memo = #{m_memo},	
+		        m_image = #{m_image}
+ 		WHERE m_seq = #{m_seq}
+ 	</update>
+ 	<delete id="delete">
+ 		DELETE FROM tbl_memo WHERE m_seq = #{m_seq}
+ 	</delete>
+ 	
+ 	<select id="create_memo_table">
+	 		
+	 	CREATE TABLE IF NOT EXISTS tbl_memo (	
+	 		m_seq BIGINT  PRIMARY KEY AUTO_INCREMENT,
+	 		m_author VARCHAR(25) NOT NULL,
+	 		m_date VARCHAR(10) NOT NULL,
+	 		m_time VARCHAR(10) NOT NULL,
+	 		m_memo VARCHAR(40) NOT NULL,
+	 		m_image VARCHAR(125)
+		)
+	 	
+ 	</select>
+ 
+ </mapper> 
