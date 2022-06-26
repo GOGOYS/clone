@@ -20,34 +20,41 @@ form {
 	display: flex;
 	flex-direction: column;
 }
+.memo-list{
+	border-collapse: collapse;
+}
+
+.memo-list tr th, .memo-list tr td{
+	border: 1px solid #aaa;
+}
 </style>
 
 </head>
 <body>
 	<h1>메모장 프로젝트</h1>
-	<table class="memo">
+	<table class="memo-list">
 		<thead>
 			<tr>
 				<th>순서</th>
+				<th>작성일</th>
 				<th>내용</th>
 				<th>작성자</th>
-				<th>이미지</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${MEMO}" var="MEMO">
 				<tr data-memo="${MEMO.m_seq}">
-				
 					<td>${MEMO.m_seq}</td>
+					<td>${MEMO.m_date}</td>
 					<td>${MEMO.m_memo}</td>
 					<td>${MEMO.m_author}</td>
-					<td><img src="${rootPath}/upload/${MEMO.m_image}" width ="100px" alt="${MEMO}"/></td>
 				</tr>
 			</c:forEach>
 
 		</tbody>
 	</table>
 	<a href="${rootPath}/memo/memo_write">메모하러 가기</a>
+	<a href="${rootPath}/random">랜덤 뽑기</a>
 
 </body>
 <script src="${rootPath}/static/js/memo.js?ver=2022-06-24-002"></script>

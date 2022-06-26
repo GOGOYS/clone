@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.callor.app.Service.MemoService;
@@ -66,7 +65,7 @@ public class MemoController {
 	}
 	
 	@RequestMapping(value="/{memo}/detail")
-	public String memo_detail(@PathVariable("memo") String m_seq, Model model ) {
+	public String memo_detail(@PathVariable("memo") int m_seq, Model model ) {
 		MemoVO memoVO = memoService.findById(m_seq);
 		model.addAttribute("MEMO", memoVO);
 		
@@ -74,20 +73,20 @@ public class MemoController {
 		
 	}
 	
-	@RequestMapping(value = "/update/{MEMO.m_seq}", method = RequestMethod.GET)
-	public String update(@PathVariable("MEMO.m_seq") String seq) {
+	@RequestMapping(value = "/update/{m_seq}", method = RequestMethod.GET)
+	public String update(@PathVariable("m_seq") int seq, Model model) {
 		
 		MemoVO memoVO = memoService.findById(seq);
+		model.addAttribute("MEMO", memoVO);
+		
 		log.debug("아아아아아: {}",seq);
 		return "/memo/memo_update";
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(int seq, Model model, 
+	@RequestMapping(value = "/update/{m_seq}", method = RequestMethod.POST)
+	public String update(Model model, 
 			@ModelAttribute("memoVO") MemoVO memoVO, 
-			@RequestParam("up_file") MultipartFile up_file,
-			SessionStatus status) {
-		log.debug(up_file.toString());
+			@RequestParam("up_file") MultipartFile up_file) {
 		
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -106,15 +105,14 @@ public class MemoController {
 		memoVO.setM_time(timeFormat.format(date));
 		memoService.update(memoVO);
 		
-		status.setComplete();
 		
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/delete/{MEMO.m_seq}", method = RequestMethod.GET)
-	public String delete(String seq) {
+	@RequestMapping(value = "/delete/{m_seq}", method = RequestMethod.GET)
+	public String delete(@PathVariable int m_seq) {
 		
-		memoService.delete(seq);
+		memoService.delete(m_seq);
 		return "redirect:/";
 	}
 	

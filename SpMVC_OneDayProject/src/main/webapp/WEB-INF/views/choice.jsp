@@ -24,7 +24,7 @@
 <body>
 	<h1>메모장 프로젝트</h1>
 	
-	<h2>상세보기</h2>
+	<h2>오늘의 메모</h2>
 	
 	<table>
 		<thead>
@@ -44,8 +44,6 @@
 			</tr>
 		</tbody>
 	</table>
-	
-	<a href="${rootPath}/memo/update/${MEMO.m_seq}">수정하기</a>
-	<a href="${rootPath}/memo/delete/${MEMO.m_seq}">삭제하기</a>
+
 </body>
 </html>

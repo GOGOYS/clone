@@ -46,7 +46,7 @@ class MemoServiceImplV2 implements MemoService{
 	}
 
 	@Override
-	public MemoVO findById(String  seq) {
+	public MemoVO findById(int  seq) {
 		return memoDao.findById(seq);
 	}
 
@@ -62,7 +62,7 @@ class MemoServiceImplV2 implements MemoService{
 	}
 
 	@Override
-	public int delete(String seq) {
+	public int delete(int seq) {
 		return memoDao.delete(seq);
 	}
 
