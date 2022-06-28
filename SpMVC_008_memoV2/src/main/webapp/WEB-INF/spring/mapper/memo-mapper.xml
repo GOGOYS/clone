@@ -24,14 +24,20 @@
  			m_time,
  			m_memo,
  			m_image,
- 			m_up_image
+ 			m_up_image,
+ 			m_mapx,
+ 			m_mapy,
+ 			m_icon
  		) VALUES (
  			#{m_author},
  			#{m_date},
  			#{m_time},
  			#{m_memo},
  			#{m_image},
- 			#{m_up_image}
+ 			#{m_up_image},
+ 			#{m_mapx},
+ 			#{m_mapy},
+ 			#{m_icon}
  		)
  	</insert>
  	<update id="update" parameterType="MemoDTO">
@@ -41,7 +47,10 @@
  			m_time = #{m_time},
  			m_memo = #{m_memo},
  			m_image = #{m_image},
- 			m_up_image = #{m_up_image}
+ 			m_up_image = #{m_up_image},
+ 			m_mapx = #{m_mapx},
+ 			m_mapy = #{m_mapy},
+ 			m_icon = #{m_icon}
  		WHERE m_seq = #{m_seq}
  	</update>
  	<delete id="delete">
@@ -57,7 +66,10 @@
  			m_time VARCHAR(10) NOT NULL,
  			m_memo VARCHAR(40) NOT NULL,
  			m_image VARCHAR(125),
- 			m_up_image VARCHAR(125) 
+ 			m_up_image VARCHAR(125), 
+ 			m_mapx VARCHAR(25), 
+ 			m_mapy VARCHAR(25), 
+ 			m_icon VARCHAR(125) 
  		)
  	</select>
  

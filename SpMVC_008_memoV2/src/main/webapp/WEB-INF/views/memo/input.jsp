@@ -45,6 +45,9 @@ input {
 	<form method="POST" enctype="multipart/form-data">
 		<input name="m_seq" type="hidden" value='<c:out value="${MEMO.m_seq}" default="0"/>'/>
 		<input name="m_memo" placeholder="메모를 입력하세요" value="${MEMO.m_memo}"/> 
+		<input name="m_mapx" type="hidden" value="${MEMO.m_mapx}"/> 
+		<input name="m_mapy" type="hidden" value="${MEMO.m_mapy}"/> 
+		<input name="m_icon" type="hidden" value="${MEMO.m_icon}"/> 
 		<input name="file" type="file" accept="image/*"/>
 		<button>메모 기록</button>
 	</form>

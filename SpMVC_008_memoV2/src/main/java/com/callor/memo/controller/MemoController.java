@@ -28,7 +28,7 @@ public class MemoController {
 	@Autowired
 	private MemoService memoService;
 	
-	@RequestMapping(value="/insert",method=RequestMethod.GET)
+	@RequestMapping(value="/memo-map",method=RequestMethod.GET)
 	public String insert(@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession) {
 		
 		String username = (String) httpSession.getAttribute("USERNAME");
@@ -38,7 +38,7 @@ public class MemoController {
 		}
 		
 		memo.setM_author(username);
-		return "memo/input";
+		return "memo/memo-map";
 	}
 	
 	
@@ -47,7 +47,7 @@ public class MemoController {
 	 * form의 file input box의 이름은 절대 VO, DTO에 선언된 이름을 사용하면 안된다.
 	 * 타입이 달라서 400 오류가 뜬다.
 	 */
-	@RequestMapping(value="/insert",method=RequestMethod.POST)
+	@RequestMapping(value="/memo-map",method=RequestMethod.POST)
 	public String insert(MultipartFile file,@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession) {
 		
 		//메모를 저장하기 전에 현재 session에 저장된 usename을 가져오기
@@ -59,7 +59,7 @@ public class MemoController {
 		log.debug("메모 {}", memo.toString());
 		log.debug("파일 {}", file.getOriginalFilename());
 		
-		return "redirect:/";
+		return "redirect:/memo/memo-map";
 	}	
 	
 	@RequestMapping(value="/{seq}/detail", method=RequestMethod.GET)

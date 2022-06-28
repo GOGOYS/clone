@@ -39,7 +39,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="${rootPath}/memo/insert">메모장 바로가기</a>
+	<a href="${rootPath}/memo/memo-map">메모장 바로가기</a>
 	<c:if test="${empty USERNAME}">
 		<a href="${rootPath}/user/login">로그인하기</a>
 	</c:if>
