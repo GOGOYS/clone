@@ -51,42 +51,40 @@ nav.icon-memu-bar{
 	position: fixed;
 	top: 20px;
 	left: 160px;
-	width:786px;
+	width:696px;
 	height: 56px;
 	background-color: #fff;
 	border-radius: 8px;
 	z-index: 10000;
 }
 
-nav.icon-menu-bar ul{
+.icon-menu-ul{
 	display: flex;
-	display: inline-block;
+	margin-top:14px;
 }
+
 nav.icon-memu-bar ul li{
 	display: inline-block;
 	text-align: center;
 }
 nav.icon-memu-bar ul li img{
-	width:60px;
+	width:50px;
 	line-height: 56px;
 }
 nav.icon-memu-bar ul li{
-	height:40px;
-	padding:0 8px;
+	height:30px;
+	padding:0 12px;
 	border-left: 1px solid #ddd;
 	margin: auto 0;
 }
 nav.icon-memu-bar ul li:first-child{
-	margin-left: 24px;
+	margin-left: 12px;
 	border:none;
-}
-nav.icon-memu-bar ul li:last-child{
-	margin-right: 24px;
 }
 
 .input-form{
 	width:500px;
-	height: 460px;
+	height: 500px;
 	position: fixed;
 	top:50%;
 	left: 50%;
@@ -120,6 +118,12 @@ input[type=radio]:checked +label{
 	color: fff;
 }
 
+input[name=m_title]{
+	width: 488px;
+	padding:5px;
+	margin-bottom: 8px;
+}
+
 div.input-icon-box{
 	margin-top:20px;
 }
@@ -136,6 +140,65 @@ div.btn-close{
 
 .input-form button{
 	margin: 20px auto 0;
+}
+
+div.memo-list-wrap{
+	width:24vw;;
+	height: 100vh;
+	background-color: #fff;
+	position: fixed;
+	top:0;
+	left: 76vw;
+	z-index: 10000;
+}
+
+div.memo-list-info{
+	padding:20px;
+}
+
+div.memo-list-info p{
+	font-size: 20px;
+	border-bottom: 1px solid #aaa;
+}
+
+div.memo-list-view{
+	padding: 0 20px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 860px;
+}
+div.memo-list-titleIcon{
+	display: flex;
+	justify-content: space-between;
+	margin-top:30px;
+}
+div.memo-list-m_title p{
+	font-size: 24px;
+	display: inline-block;
+}
+
+img.memo-list-m_icon{
+	width: 56px;
+}
+
+div.memo-list-m_image{
+	width: 400px;
+	height: 160px;
+	overflow: hidden;
+	margin-top:4px;
+}
+
+div.memo-list-m_image img{
+	width: 400px;
+}
+
+div.memo-list-m_memo{
+	margin:4px 0 10px;
+	border-bottom: 1px solid #aaa;
+}
+
+div.memo-list-xy{
+	display: none;
 }
 </style>
 </head>
@@ -158,7 +221,7 @@ div.btn-close{
 		<div id="map" style="width:100vw;height:100vh;"></div>
 	</div>
 	<nav class="icon-memu-bar">
-		<ul>
+		<ul class="icon-menu-ul">
 			<li><img src="${rootPath}/static/image/goorme (1).png"></li>
 			<li><img src="${rootPath}/static/image/goorme (2).png"></li>
 			<li><img src="${rootPath}/static/image/goorme (3).png"></li>
@@ -197,7 +260,6 @@ div.btn-close{
 		</div>
 		<button type="submit">메모 기록</button>
 	</form>
-	
 	<div class="memo-list-wrap">
 		<div class="memo-list-info">
 			<p>${USERNAME}님의 구르미</p>
@@ -205,20 +267,24 @@ div.btn-close{
 		<div class="memo-list-view">
 			<c:forEach items="${MEMOS}" var="MEMO">
 			<div data-seq="${MEMO.m_seq}">
-				<div>${MEMO.m_title}</div>
-				<c:if test="${not empty MEMO.m_icon}">
-					<div><img class="memo-list-icon" src="${rootPath}${MEMO.m_icon}"></div>
-				</c:if>
-				<c:if test="${empty MEMO.m_icon}">
-					<div>없어</div>
-				</c:if>
+				<div class="memo-list-titleIcon">
+					<div class="memo-list-m_title"><p>${MEMO.m_title}</p></div>
+					<c:if test="${not empty MEMO.m_icon}">
+						<img class="memo-list-m_icon" src="${rootPath}${MEMO.m_icon}">
+					</c:if>
+					<c:if test="${empty MEMO.m_icon}">
+						<div>없어</div>
+					</c:if>
+				</div>
 				<c:if test="${not empty MEMO.m_image}">
-					<div><img class="memo-list-image" src="${rootPath}/upload/${MEMO.m_up_image}"></div>					
+					<div class="memo-list-m_image"><img src="${rootPath}/upload/${MEMO.m_up_image}"></div>					
 				</c:if>
 				<c:if test="${empty MEMO.m_image}">
 					<div>없어</div>					
 				</c:if>
-				<div>${MEMO.m_memo}</div>
+				<div class="memo-list-m_memo"><p>${MEMO.m_memo}</p></div>
+				<div class="memo-list-xy">${MEMO.m_mapx}</div>
+				<div class="memo-list-xy">${MEMO.m_mapy}</div>
 			</div>
 			</c:forEach>
 		</div>
