@@ -2,6 +2,7 @@ package com.callor.memo.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,15 +22,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping(value="/memo")
+@RequestMapping(value="/memo/memo-map")
 public class MemoController {
 	
 	
 	@Autowired
 	private MemoService memoService;
 	
-	@RequestMapping(value="/memo-map",method=RequestMethod.GET)
-	public String insert(@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession) {
+	@RequestMapping(value={"","/"},method=RequestMethod.GET)
+	public String insert(@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession, Model model) {
 		
 		String username = (String) httpSession.getAttribute("USERNAME");
 		
@@ -38,6 +39,9 @@ public class MemoController {
 		}
 		
 		memo.setM_author(username);
+		
+		List<MemoDTO> memoList = memoService.findByAuthor(username);
+		model.addAttribute("MEMOS",memoList);
 		return "memo/memo-map";
 	}
 	
@@ -47,7 +51,7 @@ public class MemoController {
 	 * form의 file input box의 이름은 절대 VO, DTO에 선언된 이름을 사용하면 안된다.
 	 * 타입이 달라서 400 오류가 뜬다.
 	 */
-	@RequestMapping(value="/memo-map",method=RequestMethod.POST)
+	@RequestMapping(value={"","/"},method=RequestMethod.POST)
 	public String insert(MultipartFile file,@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession) {
 		
 		//메모를 저장하기 전에 현재 session에 저장된 usename을 가져오기
@@ -56,6 +60,7 @@ public class MemoController {
 		memo.setM_author(username);
 		
 		memoService.insertAndUpdate(memo, file);
+		log.debug(memo.toString());
 		log.debug("메모 {}", memo.toString());
 		log.debug("파일 {}", file.getOriginalFilename());
 		

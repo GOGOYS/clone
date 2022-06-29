@@ -7,7 +7,7 @@
  
  	<select id="selectAll" resultType="MemoDTO">
  		SELECT * FROM tbl_memos
- 		OEDER BY m_date
+ 		WHERE m_seq = #{m_seq}
  	</select>
  	<select id="findById" resultType="MemoDTO">
  		SELECT * FROM tbl_memos
@@ -22,6 +22,7 @@
  			m_author,
  			m_date,
  			m_time,
+ 			m_title,
  			m_memo,
  			m_image,
  			m_up_image,
@@ -32,6 +33,7 @@
  			#{m_author},
  			#{m_date},
  			#{m_time},
+ 			#{m_title},
  			#{m_memo},
  			#{m_image},
  			#{m_up_image},
@@ -45,6 +47,7 @@
  			m_author = #{m_author},
  			m_date = #{m_date},
  			m_time = #{m_time},
+ 			m_title = #{m_title},
  			m_memo = #{m_memo},
  			m_image = #{m_image},
  			m_up_image = #{m_up_image},
@@ -64,7 +67,8 @@
  			m_author VARCHAR(25) NOT NULL,
  			m_date VARCHAR(10) NOT NULL,
  			m_time VARCHAR(10) NOT NULL,
- 			m_memo VARCHAR(40) NOT NULL,
+ 			m_title VARCHAR(40) NOT NULL,
+ 			m_memo VARCHAR(1000) NOT NULL,
  			m_image VARCHAR(125),
  			m_up_image VARCHAR(125), 
  			m_mapx VARCHAR(25), 

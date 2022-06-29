@@ -23,6 +23,7 @@ public class MemoDTO {
 	private String m_author;
 	private String m_date;
 	private String m_time;
+	private String m_title;
 	private String m_memo;
 	private String m_image;
 	private String m_mapx;

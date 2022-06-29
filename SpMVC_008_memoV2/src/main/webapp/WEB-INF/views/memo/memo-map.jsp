@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width initial-scale=1.0" />
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=893369622e6174e9707bd86f1b9af909"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=893369622e6174e9707bd86f1b9af909&libraries=services,clusterer"></script>
 <title>간단한 지도 표시하기</title>
 
 <style>
@@ -47,7 +47,7 @@ nav.menu-bar li{
 }
 
 
-.icon-memu-bar{
+nav.icon-memu-bar{
 	position: fixed;
 	top: 20px;
 	left: 160px;
@@ -84,16 +84,32 @@ nav.icon-memu-bar ul li:last-child{
 	margin-right: 24px;
 }
 
-div.input-form{
+.input-form{
 	width:500px;
-	height: 500px;
+	height: 460px;
 	position: fixed;
 	top:50%;
 	left: 50%;
 	z-index: 10000;
 	background-color: #fff;
 	transform: translate(-50%, -50%);
+	display: none;
+	padding:20px;
+	border-radius: 8px;
 }
+
+div.input-info{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #aaa;
+}
+
+div.input-info p{
+	font-size: 24px;
+}
+
+
 
 .icon-radio{
 	opacity: 0;
@@ -102,6 +118,24 @@ div.input-form{
 input[type=radio]:checked +label{
 	background-color: #ccc;
 	color: fff;
+}
+
+div.input-icon-box{
+	margin-top:20px;
+}
+
+div.input-icon-box p{
+	text-align: center;
+	border-bottom: 1px solid #aaa;
+	margin-bottom: 10px;
+}
+
+div.btn-close{
+	cursor: pointer;
+}
+
+.input-form button{
+	margin: 20px auto 0;
 }
 </style>
 </head>
@@ -136,22 +170,59 @@ input[type=radio]:checked +label{
 			<li><img src="${rootPath}/static/image/goorme (9).png"></li>
 		</ul>
 	</nav>
-	<div class="input-form">
-		<form method="POST" enctype="multipart/form-data">
-			<input name="m_seq" type="hidden" value='<c:out value="${MEMO.m_seq}" default="0"/>'/>
-			<textarea name="m_memo" placeholder="메모를 입력하세요" cols="50" rows="10">${MEMO.m_memo}</textarea> 
-			<input id="mapx" name="m_mapx" type="hidden" value=""/> 
-			<input id="mapy" name="m_mapy" type="hidden" value=""/> 
+	<form class="input-form" method="POST" enctype="multipart/form-data">
+		<div class="input-info">
+			<p>${USERNAME}</p>
+			<div class="btn-close" onclick="btn-close">&times;</div>
+		</div>
+		<input name="m_title" placeholder="제목을 입력하세요" value="${MEMO.m_title}">
+		<textarea name="m_memo" placeholder="메모를 입력하세요" cols="69" rows="16">${MEMO.m_memo}</textarea> 
+		<input name="m_seq" type="hidden" value='<c:out value="${MEMO.m_seq}" default="0"/>'/>
+		<input id="mapx" name="m_mapx" type="hidden" value=""/> 
+		<input id="mapy" name="m_mapy" type="hidden" value=""/> 			
+		<input name="file" type="file" accept="image/*"/>
 			
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-1" value="/static/image/goorme (1).png"/> <label for="icon-btn-1">아이콘</label>
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-2" value="/static/image/goorme (2).png"/> <label for="icon-btn-2">아이콘1</label>
+		<div class="input-icon-box">
+			<p>구르미 고르미</p>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-1" value="/static/image/goorme (1).png"/> <label for="icon-btn-1">아이콘1</label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-2" value="/static/image/goorme (2).png"/> <label for="icon-btn-2">아이콘2</label>
 			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-3" value="/static/image/goorme (3).png"/> <label for="icon-btn-3">아이콘3</label>
-			<input name="file" type="file" accept="image/*"/>
-			<button>메모 기록</button>
-		</form>
-	</div>
-
-
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-4" value="/static/image/goorme (4).png"/> <label for="icon-btn-4">아이콘4</label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-5" value="/static/image/goorme (5).png"/> <label for="icon-btn-5">아이콘5</label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-6" value="/static/image/goorme (6).png"/> <label for="icon-btn-6">아이콘6</label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-7" value="/static/image/goorme (7).png"/> <label for="icon-btn-7">아이콘7</label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-8" value="/static/image/goorme (8).png"/> <label for="icon-btn-8">아이콘8</label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-9" value="/static/image/goorme (9).png"/> <label for="icon-btn-9">아이콘9</label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-10" value="/static/image/goorme (10).png"/> <label for="icon-btn-10">아이콘10</label>
+		</div>
+		<button type="submit">메모 기록</button>
+	</form>
+	
+	<div class="memo-list-wrap">
+		<div class="memo-list-info">
+			<p>${USERNAME}님의 구르미</p>
+		</div>
+		<div class="memo-list-view">
+			<c:forEach items="${MEMOS}" var="MEMO">
+			<div data-seq="${MEMO.m_seq}">
+				<div>${MEMO.m_title}</div>
+				<c:if test="${not empty MEMO.m_icon}">
+					<div><img class="memo-list-icon" src="${rootPath}${MEMO.m_icon}"></div>
+				</c:if>
+				<c:if test="${empty MEMO.m_icon}">
+					<div>없어</div>
+				</c:if>
+				<c:if test="${not empty MEMO.m_image}">
+					<div><img class="memo-list-image" src="${rootPath}/upload/${MEMO.m_up_image}"></div>					
+				</c:if>
+				<c:if test="${empty MEMO.m_image}">
+					<div>없어</div>					
+				</c:if>
+				<div>${MEMO.m_memo}</div>
+			</div>
+			</c:forEach>
+		</div>
+	</div>	
 
 </body>
 	<script>
@@ -181,11 +252,23 @@ input[type=radio]:checked +label{
 		    // 마커 위치를 클릭한 위치로 옮깁니다
 		    marker.setPosition(latlng);		   
 		    
-		    var resultDiv = document.getElementById('mapx').value = latlng.getLat(); 
+		    document.getElementById('mapx').value = latlng.getLat(); 
 		    
-		    var resultDiv = document.getElementById('mapy').value = latlng.getLng(); 
+		    document.getElementById('mapy').value = latlng.getLng(); 
+		    
+		    //input 박스 나타내기
+		    document.querySelector('.input-form').style.display = "block";
 		    
 		});
+		
+		//input 박스 투명도로 숨기기
+		var btn_close = document.querySelector('.btn-close')
+		
+		btn_close.addEventListener("click",()=>{
+			document.querySelector('.input-form').style.display = "none";
+		});
+		
+	
 	</script>
 
 </html>

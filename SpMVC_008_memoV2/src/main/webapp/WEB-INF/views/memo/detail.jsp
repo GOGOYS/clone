@@ -20,6 +20,7 @@
 	<div>시간 : ${MEMO.m_time}</div>
 	<div>내용 : ${MEMO.m_memo}</div>
 	<div>이미지 : <img src="${rootPath}/upload/${MEMO.m_up_image}" alt="${MEMO.m_image}" width="500px"></div>
+	<div>아이콘 : <img src="${rootPath}${MEMO.m_icon}" alt="${MEMO.m_icon}" width="500px"></div>
 	
 	<div>
 		<a href="${rootPath}/memo/${MEMO.m_seq}/update">수정</a>
