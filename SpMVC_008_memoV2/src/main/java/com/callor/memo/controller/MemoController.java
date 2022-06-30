@@ -56,10 +56,7 @@ public class MemoController {
 		JSONArray arrayX = new JSONArray(mapx);
 		JSONArray arrayY = new JSONArray(mapy);
 		
-		if(memoList.toString() == null) {
-			model.addAttribute("NOMEMO", null);
-		}
-		
+
 		//log.debug(mapXY.toString());
 		
 		model.addAttribute("mapX",arrayX);
