@@ -44,6 +44,7 @@ input {
 <body>
 	<form method="POST" enctype="multipart/form-data">
 		<input name="m_seq" type="hidden" value='<c:out value="${MEMO.m_seq}" default="0"/>'/>
+		<input name="m_title" placeholder="제목을 입력하세요"  value="${MEMO.m_title}"/>
 		<input name="m_memo" placeholder="메모를 입력하세요" value="${MEMO.m_memo}"/> 
 		<input name="m_mapx" type="hidden" value="${MEMO.m_mapx}"/> 
 		<input name="m_mapy" type="hidden" value="${MEMO.m_mapy}"/> 

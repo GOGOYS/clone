@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const memo_table = document.querySelector("table.memo");
+  const memo_list = document.querySelector("div.memo-list-view");
 
-  memo_table?.addEventListener("click", (e) => {
+  memo_list?.addEventListener("click", (e) => {
     //table에 클릭 이벤트를 적용하면 가장 안쪽의 td가 타겟으로 작동한다.
     const target = e.target;
     //가장 안쪽의 TD가 클릭되면
     //TD를 감싸고 있는 tr을 찾아라
-    const tr = target?.closest("TR");
+    const choice = target?.closest("div.choice");
 
-    const seq = tr?.dataset.seq;
+    const seq = choice?.dataset.seq;
 
 
     /*
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       seq 값이 정상적인 범위 값일때만 detail로 점프하기
     */
     if(seq){
-      document.location.href = `${rootPath}/memo/${seq}/detail`;
+      document.location.href = `${rootPath}/memo/memo-map/${seq}/detail`;
     }
   });
 });

@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.callor.memo.model.MemoDTO;
+import com.callor.memo.persistance.MemoDao;
 
-public interface MemoService {
+public interface MemoService extends MemoDao{
 	public List<MemoDTO> selectAll();
 	
 	public int insertAndUpdate(MemoDTO memo, MultipartFile file);

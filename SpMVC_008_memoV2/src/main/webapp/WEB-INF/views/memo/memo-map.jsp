@@ -26,6 +26,7 @@
 
 .container {
 	display: flex;
+	background-color: #45AFFF;
 }
 
 header{
@@ -34,7 +35,7 @@ header{
 
 header .logoBlue img{
 	width: 80px;
-	margin: 20px 0 20px 15px ;
+	margin: 26px 0 20px 15px ;
 }
 
 nav.menu-bar ul{
@@ -42,10 +43,18 @@ nav.menu-bar ul{
 	flex-direction: column;
 }
 nav.menu-bar li{
-	display: inline-block;
-	font-size: 20px;
-	padding: 20px 20px;
-	text-align: center;
+	margin-top:40px;
+}
+nav.menu-bar li a{
+	color: #fff;
+	text-decoration: none;
+		font-size: 20px;
+	padding: 20px 36px;
+}
+nav.menu-bar li a:hover{
+	background-color: #fff;
+	color:#45AFFF;
+	font-weight: 900;
 }
 
 
@@ -107,6 +116,7 @@ div.input-info{
 
 div.input-info p{
 	font-size: 24px;
+	color: #45AFFF;
 }
 
 
@@ -116,7 +126,8 @@ div.input-info p{
 }
 
 input[type=radio]:checked +label{
-	border-bottom: 1px solid #aaa;
+	border-bottom: 3px solid #186D94;
+	border-radius: 8px;
 }
 
 input[name=m_title]{
@@ -141,16 +152,17 @@ div.btn-close{
 
 .input-form button{
 	margin: 40px 0 0 198px;
-	background-color: aaa;
+	background-color: #45AFFF;
 	border: none;
 	font-size: 16px;
 	padding: 8px 20px;
 	border-radius: 8px;
+	color: #fff;
 }
 
 
 .input-form button:hover{
-	background-color: #aaa;
+	background-color: #186D94;
 	color: #fff;
 }
 div.memo-list-wrap{
@@ -234,7 +246,7 @@ div.container-wrap{
 	border-radius: 8px;
 }
 .slide-home a{
-	color: black;
+	color: #45AFFF;
 }
 
 .memo-list-btn{
@@ -246,9 +258,11 @@ div.container-wrap{
 	border-radius: 20px 0 0 20px;
 }
 
-div.memo-list-btn i{
-	margin-top: 30px;
+div.memo-list-btn svg{
+	margin: 50px 0 0 10px;
+	
 }
+
 
 
 
@@ -258,14 +272,14 @@ div.memo-list-btn i{
 	<div class="container">
 		<header>
 			<div class="logoBlue">
-				<img src="${rootPath}/static/image/logoBlue.png">
+				<img src="${rootPath}/static/image/logoWhite.png">
 			</div>
 			<nav class="menu-bar">
 				<ul>
-					<li id="clickLatlng">메뉴</li>
-					<li>메뉴</li>
-					<li>메뉴</li>
-					<li>메뉴</li>
+					<li><a href="">메뉴</a></li>
+					<li><a href="">메뉴</a></li>
+					<li><a href="">메뉴</a></li>
+					<li><a href="">메뉴</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -274,21 +288,21 @@ div.memo-list-btn i{
 	</div>
 	<nav class="icon-memu-bar">
 		<ul class="icon-menu-ul">
-			<li><img src="${rootPath}/static/image/goorme (1).png"></li>
-			<li><img src="${rootPath}/static/image/goorme (2).png"></li>
-			<li><img src="${rootPath}/static/image/goorme (3).png"></li>
-			<li><img src="${rootPath}/static/image/goorme (4).png"></li>
-			<li><img src="${rootPath}/static/image/goorme (5).png"></li>
-			<li><img src="${rootPath}/static/image/goorme (6).png"></li>
-			<li><img src="${rootPath}/static/image/goorme (7).png"></li>
-			<li><img src="${rootPath}/static/image/goorme (8).png"></li>
-			<li><img src="${rootPath}/static/image/goorme (9).png"></li>
-			<li><img src="${rootPath}/static/image/goorme (10).png"></li>
+			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(1).png"><img src="${rootPath}/static/image/goorme(1).png"></a></li>
+			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(2).png"><img src="${rootPath}/static/image/goorme(2).png"></a></li>
+			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(3).png"><img src="${rootPath}/static/image/goorme(3).png"></a></li>
+			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(4).png"><img src="${rootPath}/static/image/goorme(4).png"></a></li>
+			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(5).png"><img src="${rootPath}/static/image/goorme(5).png"></a></li>
+			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(6).png"><img src="${rootPath}/static/image/goorme(6).png"></a></li>
+			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(7).png"><img src="${rootPath}/static/image/goorme(7).png"></a></li>
+			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(8).png"><img src="${rootPath}/static/image/goorme(8).png"></a></li>
+			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(9).png"><img src="${rootPath}/static/image/goorme(9).png"></a></li>
+			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(10).png"><img src="${rootPath}/static/image/goorme(10).png"></a></li>
 		</ul>
 	</nav>
 	<form class="input-form" method="POST" enctype="multipart/form-data">
 		<div class="input-info">
-			<p>${USERNAME}</p>
+			<p>${USERNAME}님의 구르미</p>
 			<div class="btn-close" onclick="btn-close">&times;</div>
 		</div>
 		<input name="m_title" placeholder="제목을 입력하세요" value="${MEMO.m_title}">
@@ -300,16 +314,16 @@ div.memo-list-btn i{
 			
 		<div class="input-icon-box">
 			<p>구르미 고르미</p>
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-1" value="/static/image/goorme (1).png"/> <label for="icon-btn-1"><img src="${rootPath}/static/image/goorme (1).png"></label>
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-2" value="/static/image/goorme (2).png"/> <label for="icon-btn-2"><img src="${rootPath}/static/image/goorme (2).png"></label>
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-3" value="/static/image/goorme (3).png"/> <label for="icon-btn-3"><img src="${rootPath}/static/image/goorme (3).png"></label>
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-4" value="/static/image/goorme (4).png"/> <label for="icon-btn-4"><img src="${rootPath}/static/image/goorme (4).png"></label>
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-5" value="/static/image/goorme (5).png"/> <label for="icon-btn-5"><img src="${rootPath}/static/image/goorme (5).png"></label>
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-6" value="/static/image/goorme (6).png"/> <label for="icon-btn-6"><img src="${rootPath}/static/image/goorme (6).png"></label>
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-7" value="/static/image/goorme (7).png"/> <label for="icon-btn-7"><img src="${rootPath}/static/image/goorme (7).png"></label>
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-8" value="/static/image/goorme (8).png"/> <label for="icon-btn-8"><img src="${rootPath}/static/image/goorme (8).png"></label>
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-9" value="/static/image/goorme (9).png"/> <label for="icon-btn-9"><img src="${rootPath}/static/image/goorme (9).png"></label>
-			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-10" value="/static/image/goorme (10).png"/> <label for="icon-btn-10"><img src="${rootPath}/static/image/goorme (10).png"></label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-1" value="/static/image/goorme(1).png"/> <label for="icon-btn-1"><img src="${rootPath}/static/image/goorme(1).png"></label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-2" value="/static/image/goorme(2).png"/> <label for="icon-btn-2"><img src="${rootPath}/static/image/goorme(2).png"></label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-3" value="/static/image/goorme(3).png"/> <label for="icon-btn-3"><img src="${rootPath}/static/image/goorme(3).png"></label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-4" value="/static/image/goorme(4).png"/> <label for="icon-btn-4"><img src="${rootPath}/static/image/goorme(4).png"></label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-5" value="/static/image/goorme(5).png"/> <label for="icon-btn-5"><img src="${rootPath}/static/image/goorme(5).png"></label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-6" value="/static/image/goorme(6).png"/> <label for="icon-btn-6"><img src="${rootPath}/static/image/goorme(6).png"></label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-7" value="/static/image/goorme(7).png"/> <label for="icon-btn-7"><img src="${rootPath}/static/image/goorme(7).png"></label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-8" value="/static/image/goorme(8).png"/> <label for="icon-btn-8"><img src="${rootPath}/static/image/goorme(8).png"></label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-9" value="/static/image/goorme(9).png"/> <label for="icon-btn-9"><img src="${rootPath}/static/image/goorme(9).png"></label>
+			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-10" value="/static/image/goorme(10).png"/> <label for="icon-btn-10"><img src="${rootPath}/static/image/goorme(10).png"></label>
 		</div>
 		<button type="submit">메모 기록</button>
 	</form>
@@ -323,22 +337,25 @@ div.memo-list-btn i{
 				<p>${USERNAME}님의 구르미</p>
 			</div>
 			<div class="memo-list-view">
+				<%-- <c:if test="${NOMEMO == null}">
+					<p>구르미가 없습니다</p>
+				</c:if> --%>
 				<c:forEach items="${MEMOS}" var="MEMO">
-				<div data-seq="${MEMO.m_seq}">
+				<div class="choice" data-seq="${MEMO.m_seq}">
 					<div class="memo-list-titleIcon">
 						<div class="memo-list-m_title"><p>${MEMO.m_title}</p></div>
 						<c:if test="${not empty MEMO.m_icon}">
 							<img class="memo-list-m_icon" src="${rootPath}${MEMO.m_icon}">
 						</c:if>
 						<c:if test="${empty MEMO.m_icon}">
-							<div>없어</div>
+							<div>구르미 없어</div>
 						</c:if>
 					</div>
 					<c:if test="${not empty MEMO.m_image}">
 						<div class="memo-list-m_image"><img src="${rootPath}/upload/${MEMO.m_up_image}"></div>					
 					</c:if>
 					<c:if test="${empty MEMO.m_image}">
-						<div>없어</div>					
+						<div>사진 없어</div>					
 					</c:if>
 					<div class="memo-list-m_memo"><p>${MEMO.m_memo}</p></div>
 					<div class="memo-list-xy">${MEMO.m_mapx}</div>
@@ -351,6 +368,7 @@ div.memo-list-btn i{
 
 </body>
 	<script>
+		const rootPath = "${rootPath}"
 		var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(35.160010812082966, 126.9102089290472),
@@ -428,5 +446,5 @@ div.memo-list-btn i{
 		
 	
 	</script>
-
+	<script src="${rootPath}/static/js/memo.js?ver=2022-06-30-004"></script>
 </html>

@@ -14,6 +14,7 @@ public interface MemoDao {
 	
 	public List<MemoDTO> findByMemo(String memo);
 	public List<MemoDTO> findByAuthor(String author);
+	public List<MemoDTO> findByIcon(String Icon);
 	
 	public void create_memo_table();
 }

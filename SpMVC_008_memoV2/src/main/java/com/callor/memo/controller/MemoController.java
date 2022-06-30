@@ -56,7 +56,9 @@ public class MemoController {
 		JSONArray arrayX = new JSONArray(mapx);
 		JSONArray arrayY = new JSONArray(mapy);
 		
-		
+		if(memoList.toString() == null) {
+			model.addAttribute("NOMEMO", null);
+		}
 		
 		//log.debug(mapXY.toString());
 		
@@ -80,6 +82,7 @@ public class MemoController {
 		String username = (String)httpSession.getAttribute("USERNAME");
 		//저장할 메모 정보에 username 세팅
 		memo.setM_author(username);
+		
 		
 		memoService.insertAndUpdate(memo, file);
 		log.debug(memo.toString());
@@ -122,13 +125,43 @@ public class MemoController {
 		memoDTO.setM_author(username);
 		memoDTO.setM_seq(m_seq);
 		memoService.insertAndUpdate(memoDTO, file);
-		return String.format("redirect:/memo/%s/detail",seq);
+		return String.format("redirect:/memo/memo-map/%s/detail",seq);
 	}
 	
 	@RequestMapping(value="/{seq}/delete",method=RequestMethod.GET)
 	public String delete(@PathVariable("seq") String seq) {
 		memoService.delete(Long.valueOf(seq));
-		return "redirect:/";
+		return "redirect:/memo/memo-map";
+	}
+	
+	@RequestMapping(value="/find/{static}/{image}/{png:.+}",method=RequestMethod.GET)
+	public String iconChoice(@PathVariable("static") String root,
+			@PathVariable("image") String image,
+			@PathVariable("png") String png, Model model) {
+		
+		String icon = "/"+ root + "/"+ image + "/" +png;
+		log.debug(icon);
+		
+		List<MemoDTO> memoList =memoService.findByIcon(icon);
+		log.debug(memoList.toString());
+				
+		List<String> mapx = new ArrayList<String>();
+		List<String> mapy = new ArrayList<String>();
+		
+		for(int i=0; i < memoList.size(); i++) {
+			
+			mapx.add(memoList.get(i).getM_mapx());
+			mapy.add(memoList.get(i).getM_mapy());
+		}		
+		JSONArray arrayX = new JSONArray(mapx);
+		JSONArray arrayY = new JSONArray(mapy);
+		
+		
+		model.addAttribute("mapX",arrayX);
+		model.addAttribute("mapY",arrayY);
+		model.addAttribute("MEMOS",memoList);
+		return "/memo/memo-map";
+		
 	}
 	
 	@ModelAttribute("memo")
