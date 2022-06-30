@@ -17,35 +17,42 @@
 
 <script src="${rootPath}/static/js/memo.js?ver=2022-06-27-007"></script>
 
+<style>
+body{
+ 	background-color: #42e3f5;
+}
+
+.container{
+ 	position: fixed;
+	top:40%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	width:20%;
+	height: 20%;
+}
+
+.logo-img img{
+	width:300px;
+	margin: 0 auto;
+}
+ 
+</style>
 </head>
 <body>
-	<h1>${USERNAME}님 안녕</h1>
-	<table class="memo">
-		<tr>
-			<th>번호</th>
-			<th>작성일자</th>
-			<th>작성시간</th>
-			<th>메모</th>
-		</tr>
-		<c:if test="${empty MEMOS}">
-			<tr><td colspan="4">메모가 없습니다</td></tr>
-		</c:if>
-		<c:forEach items="${MEMOS}" var="MEMO" varStatus="INDEX">
-			<tr data-seq="${MEMO.m_seq}">
-				<td>${INDEX.count}</td>
-				<td>${MEMO.m_date}</td>
-				<td>${MEMO.m_time}</td>
-				<td>${MEMO.m_memo}</td>
-			</tr>
-		</c:forEach>
-	</table>
-	<a href="${rootPath}/memo/memo-map">메모장 바로가기</a>
+
+<div class="container">
+	<div class="logo-img">
+		<img src="${rootPath}/static/image/logoWhite.png">
+	</div>
+	<a href="${rootPath}/memo/memo-map">리스트 보기</a>
 	<c:if test="${empty USERNAME}">
 		<a href="${rootPath}/user/login">로그인하기</a>
 	</c:if>
 	<c:if test="${not empty USERNAME}">
 		<a href="${rootPath}/user/logout">로그아웃하기</a>
 	</c:if>
+</div>
+	
 
 </body>
 </html>

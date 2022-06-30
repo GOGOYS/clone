@@ -1,11 +1,14 @@
 package com.callor.memo.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping(value="/memo/memo-map")
+@RequestMapping(value="memo/memo-map")
 public class MemoController {
 	
 	
@@ -41,7 +44,26 @@ public class MemoController {
 		memo.setM_author(username);
 		
 		List<MemoDTO> memoList = memoService.findByAuthor(username);
+		
+		List<String> mapx = new ArrayList<String>();
+		List<String> mapy = new ArrayList<String>();
+		
+		for(int i=0; i < memoList.size(); i++) {
+			
+			mapx.add(memoList.get(i).getM_mapx());
+			mapy.add(memoList.get(i).getM_mapy());
+		}		
+		JSONArray arrayX = new JSONArray(mapx);
+		JSONArray arrayY = new JSONArray(mapy);
+		
+		
+		
+		//log.debug(mapXY.toString());
+		
+		model.addAttribute("mapX",arrayX);
+		model.addAttribute("mapY",arrayY);
 		model.addAttribute("MEMOS",memoList);
+		
 		return "memo/memo-map";
 	}
 	

@@ -33,7 +33,7 @@ public class MemoServiceImplV1 implements MemoService{
 	@Override
 	public List<MemoDTO> selectAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return memoDao.selectALL();
 	}
 
 	@Override
