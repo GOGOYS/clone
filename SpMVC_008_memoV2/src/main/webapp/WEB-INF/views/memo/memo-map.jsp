@@ -62,7 +62,7 @@ nav.icon-memu-bar{
 	position: fixed;
 	top: 20px;
 	left: 160px;
-	width:770px;
+	width:910px;
 	height: 56px;
 	background-color: #fff;
 	border-radius: 8px;
@@ -89,8 +89,14 @@ nav.icon-memu-bar ul li{
 	margin: auto 0;
 }
 nav.icon-memu-bar ul li:first-child{
-	margin-left: 12px;
 	border:none;
+	margin-left:10px;
+}
+
+nav.icon-memu-bar ul li a:first-child{
+	font-size: 20px;
+	color: #45AFFF;
+	text-decoration: none;
 }
 
 .input-form{
@@ -125,7 +131,7 @@ div.input-info p{
 	opacity: 0;
 }
 
-input[type=radio]:checked +label{
+input.icon-radio:checked +label{
 	border-bottom: 3px solid #186D94;
 	border-radius: 8px;
 }
@@ -135,6 +141,7 @@ input[name=m_title]{
 	padding:5px;
 	margin-bottom: 8px;
 }
+
 
 div.input-icon-box{
 	margin-top:20px;
@@ -158,6 +165,15 @@ div.btn-close{
 	padding: 8px 20px;
 	border-radius: 8px;
 	color: #fff;
+}
+
+div.personal-btn{
+	display: inline-block;
+	margin-left:64px;
+}
+
+div.personal-btn input{
+	margin-left:5px;
 }
 
 
@@ -288,6 +304,7 @@ div.memo-list-btn svg{
 	</div>
 	<nav class="icon-memu-bar">
 		<ul class="icon-menu-ul">
+			<li><a href="${rootPath}/memo/memo-map/all">ALL</a></li>
 			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(1).png"><img src="${rootPath}/static/image/goorme(1).png"></a></li>
 			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(2).png"><img src="${rootPath}/static/image/goorme(2).png"></a></li>
 			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(3).png"><img src="${rootPath}/static/image/goorme(3).png"></a></li>
@@ -298,19 +315,20 @@ div.memo-list-btn svg{
 			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(8).png"><img src="${rootPath}/static/image/goorme(8).png"></a></li>
 			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(9).png"><img src="${rootPath}/static/image/goorme(9).png"></a></li>
 			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(10).png"><img src="${rootPath}/static/image/goorme(10).png"></a></li>
+			<li><a href="${rootPath}/memo/memo-map/public">PUBLIC</a></li>
 		</ul>
 	</nav>
 	<form class="input-form" method="POST" enctype="multipart/form-data">
 		<div class="input-info">
 			<p>${USERNAME}님의 구르미</p>
-			<div class="btn-close" onclick="btn-close">&times;</div>
+			<div class="btn-close" onclick="btn-close"><i class="fa-solid fa-x"></i></div>
 		</div>
 		<input name="m_title" placeholder="제목을 입력하세요" value="${MEMO.m_title}">
 		<textarea name="m_memo" placeholder="메모를 입력하세요" cols="69" rows="16">${MEMO.m_memo}</textarea> 
 		<input name="m_seq" type="hidden" value='<c:out value="${MEMO.m_seq}" default="0"/>'/>
 		<input id="mapx" name="m_mapx" type="hidden" value=""/> 
 		<input id="mapy" name="m_mapy" type="hidden" value=""/> 			
-		<input name="file" type="file" accept="image/*"/>
+		<input name="m_file" type="file" accept="image/*"/>
 			
 		<div class="input-icon-box">
 			<p>구르미 고르미</p>
@@ -326,6 +344,10 @@ div.memo-list-btn svg{
 			<input type="radio" name="m_icon"  class="icon-radio" id="icon-btn-10" value="/static/image/goorme(10).png"/> <label for="icon-btn-10"><img src="${rootPath}/static/image/goorme(10).png"></label>
 		</div>
 		<button type="submit">메모 기록</button>
+		<div class="personal-btn">
+			<input type="radio" name="m_personal" id="personal-ok" value="OK"/><label for="personal-ok">공개</label>
+			<input type="radio" name="m_personal" id="personal-no" value="NO" checked="checked"/><label for="personal-no">비공개</label>
+		</div>
 	</form>
 	<div class="container-wrap">
 		<div class="memo-list-slide">
@@ -348,14 +370,14 @@ div.memo-list-btn svg{
 							<img class="memo-list-m_icon" src="${rootPath}${MEMO.m_icon}">
 						</c:if>
 						<c:if test="${empty MEMO.m_icon}">
-							<div>구르미 없어</div>
+							<img class="memo-list-m_icon" src="${rootPath}/static/image/x(2).png">
 						</c:if>
 					</div>
 					<c:if test="${not empty MEMO.m_image}">
 						<div class="memo-list-m_image"><img src="${rootPath}/upload/${MEMO.m_up_image}"></div>					
 					</c:if>
 					<c:if test="${empty MEMO.m_image}">
-						<div>사진 없어</div>					
+						<div class="memo-list-m_image"><img src="${rootPath}/static/image/x(1).png"></div>					
 					</c:if>
 					<div class="memo-list-m_memo"><p>${MEMO.m_memo}</p></div>
 					<div class="memo-list-xy">${MEMO.m_mapx}</div>
@@ -367,6 +389,9 @@ div.memo-list-btn svg{
 	</div>	
 
 </body>
+	<script>
+	
+	</script>
 	<script>
 		const rootPath = "${rootPath}"
 		var container = document.getElementById('map');

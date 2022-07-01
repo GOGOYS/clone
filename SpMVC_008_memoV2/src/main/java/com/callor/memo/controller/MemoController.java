@@ -32,8 +32,8 @@ public class MemoController {
 	@Autowired
 	private MemoService memoService;
 	
-	@RequestMapping(value={"","/"},method=RequestMethod.GET)
-	public String insert(@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession, Model model) {
+	@RequestMapping(value={"","/","/all"},method=RequestMethod.GET)
+	public String map(@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession, Model model) {
 		
 		String username = (String) httpSession.getAttribute("USERNAME");
 		
@@ -63,7 +63,33 @@ public class MemoController {
 		model.addAttribute("mapY",arrayY);
 		model.addAttribute("MEMOS",memoList);
 		
-		return "memo/memo-map";
+		return "/memo/memo-map";
+	}
+	
+	@RequestMapping(value={"/public"},method=RequestMethod.GET)
+	public String okPublic(@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession, Model model) {
+		
+		List<MemoDTO> memoList = memoService.findByPersonal("OK");
+		
+		List<String> mapx = new ArrayList<String>();
+		List<String> mapy = new ArrayList<String>();
+		
+		for(int i=0; i < memoList.size(); i++) {
+			
+			mapx.add(memoList.get(i).getM_mapx());
+			mapy.add(memoList.get(i).getM_mapy());
+		}		
+		JSONArray arrayX = new JSONArray(mapx);
+		JSONArray arrayY = new JSONArray(mapy);
+		
+
+		//log.debug(mapXY.toString());
+		
+		model.addAttribute("mapX",arrayX);
+		model.addAttribute("mapY",arrayY);
+		model.addAttribute("MEMOS",memoList);
+		
+		return "/memo/memo-map";
 	}
 	
 	
@@ -72,7 +98,7 @@ public class MemoController {
 	 * form의 file input box의 이름은 절대 VO, DTO에 선언된 이름을 사용하면 안된다.
 	 * 타입이 달라서 400 오류가 뜬다.
 	 */
-	@RequestMapping(value={"","/"},method=RequestMethod.POST)
+	@RequestMapping(value={"","/","all","public"},method=RequestMethod.POST)
 	public String insert(MultipartFile file,@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession) {
 		
 		//메모를 저장하기 전에 현재 session에 저장된 usename을 가져오기
@@ -133,14 +159,12 @@ public class MemoController {
 	
 	@RequestMapping(value="/find/{static}/{image}/{png:.+}",method=RequestMethod.GET)
 	public String iconChoice(@PathVariable("static") String root,
-			@PathVariable("image") String image,
-			@PathVariable("png") String png, Model model) {
+							 @PathVariable("image") String image,
+							 @PathVariable("png") String png, Model model) {
 		
 		String icon = "/"+ root + "/"+ image + "/" +png;
-		log.debug(icon);
 		
 		List<MemoDTO> memoList =memoService.findByIcon(icon);
-		log.debug(memoList.toString());
 				
 		List<String> mapx = new ArrayList<String>();
 		List<String> mapy = new ArrayList<String>();
@@ -160,6 +184,26 @@ public class MemoController {
 		return "/memo/memo-map";
 		
 	}
+	
+	@RequestMapping(value={"/find/{static}/{image}/{png:.+}"},method=RequestMethod.POST)
+	public String pInsert(@PathVariable("static") String root,
+			 			  @PathVariable("image") String image,
+			 			  @PathVariable("png") String png,
+			 			  MultipartFile file,@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession) {
+		
+		//메모를 저장하기 전에 현재 session에 저장된 usename을 가져오기
+		String username = (String)httpSession.getAttribute("USERNAME");
+		//저장할 메모 정보에 username 세팅
+		memo.setM_author(username);
+		
+		
+		memoService.insertAndUpdate(memo, file);
+		log.debug(memo.toString());
+		log.debug("메모 {}", memo.toString());
+		log.debug("파일 {}", file.getOriginalFilename());
+		
+		return "redirect:/memo/memo-map";
+	}	
 	
 	@ModelAttribute("memo")
 	private MemoDTO memoDTO() {

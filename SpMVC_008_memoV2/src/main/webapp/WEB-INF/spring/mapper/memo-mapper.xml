@@ -22,6 +22,10 @@
  		SELECT * FROM tbl_memos
  		WHERE m_icon = #{m_icon}
  	</select>
+ 	<select id="findByPersonal" resultType="MemoDTO">
+ 		SELECT * FROM tbl_memos
+ 		WHERE m_personal = #{m_personal}
+ 	</select>
  	<insert id="insert" parameterType="MemoDTO">
  		INSERT INTO tbl_memos(
  			m_author,
@@ -33,7 +37,8 @@
  			m_up_image,
  			m_mapx,
  			m_mapy,
- 			m_icon
+ 			m_icon,
+ 			m_personal
  		) VALUES (
  			#{m_author},
  			#{m_date},
@@ -44,7 +49,8 @@
  			#{m_up_image},
  			#{m_mapx},
  			#{m_mapy},
- 			#{m_icon}
+ 			#{m_icon},
+ 			#{m_personal}
  		)
  	</insert>
  	<update id="update" parameterType="MemoDTO">
@@ -58,7 +64,8 @@
  			m_up_image = #{m_up_image},
  			m_mapx = #{m_mapx},
  			m_mapy = #{m_mapy},
- 			m_icon = #{m_icon}
+ 			m_icon = #{m_icon},
+ 			m_personal = #{m_personal}
  		WHERE m_seq = #{m_seq}
  	</update>
  	<delete id="delete">
@@ -78,7 +85,8 @@
  			m_up_image VARCHAR(125), 
  			m_mapx VARCHAR(25), 
  			m_mapy VARCHAR(25), 
- 			m_icon VARCHAR(125) 
+ 			m_icon VARCHAR(125) ,
+ 			m_personal VARCHAR(5)
  		)
  	</select>
  

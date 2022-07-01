@@ -19,11 +19,9 @@ body{
 	overflow-y: scroll;
 }
 div.container-box {
+	margin: 0 auto;
+	margin-top:100px;
 	width: 800px;
-	position: fixed;
-	top:50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 	background-color: #fff;
 	border-radius: 12px;
 }
@@ -32,18 +30,29 @@ div.detail-info{
 	width: 720px;
 	margin: 20px auto 0;
 }
-div.detail-title{
+div.detail-author{
 	font-size: 24px;
 	padding-bottom:2px;
 }
-div.detail-inner{
+div.detail-inner1{
 	border-bottom:1px solid #aaa;
 	display: flex;
 	justify-content: space-between;
+	padding-top:20px;
 }
 
+div.detail-inner2{
+	display: flex;
+	justify-content: space-between;
+	margin-top:10px;
+}
+
+div.detail-title{
+	display: inline-block;
+	font-size: 20px;
+}
 div.detail-date{
-	margin-top:4px;
+	display: inline-block;
 }
 
 div.detail-icon img{
@@ -88,14 +97,28 @@ div.detail-btn-box a:hover{
 <body>
 	<div class="container-box">
 		<div class="detail-info">
-			<div class="detail-inner">
-				<div class="detail-title">${MEMO.m_author}님의 구르미</div>
-				<div class="detail-icon"><img src="${rootPath}${MEMO.m_icon}" alt="${MEMO.m_icon}" width="500px"></div>
+			<div class="detail-inner1">
+				<div class="detail-author">${MEMO.m_author}님의 구르미</div>
+				<c:if test="${not empty MEMO.m_icon}">
+					<div class="detail-icon"><img class="memo-list-m_icon " src="${rootPath}${MEMO.m_icon}"></div>
+				</c:if>
+					<c:if test="${empty MEMO.m_icon}">
+					<div class="detail-icon"><img class="memo-list-m_icon" src="${rootPath}/static/image/x(2).png"></div>
+				</c:if>
 			</div>
+			<div class="detail-inner2">
+				<div class="detail-title">${MEMO.m_title}</div>
 				<div class="detail-date"><i class="fa-solid fa-calendar"></i> ${MEMO.m_date} ${MEMO.m_time}</div>
-			<div class="detail-img"><img src="${rootPath}/upload/${MEMO.m_up_image}" alt="${MEMO.m_image}" width="500px"></div>
+			</div>
+					<c:if test="${not empty MEMO.m_image}">
+						<div class="memo-list-m_image detail-img"><img src="${rootPath}/upload/${MEMO.m_up_image} " alt="${MEMO.m_image}"></div>					
+					</c:if>
+					<c:if test="${empty MEMO.m_image}">
+						<div class="memo-list-m_image detail-img"><img src="${rootPath}/static/image/x(1).png" alt="${MEMO.m_image}"></div>					
+					</c:if>
 			<div class="detail-content">${MEMO.m_memo}</div>
 		</div>
+					
 	
 		<div class="detail-btn-box">
 			<a href="${rootPath}/memo/memo-map/${MEMO.m_seq}/update">수정</a>

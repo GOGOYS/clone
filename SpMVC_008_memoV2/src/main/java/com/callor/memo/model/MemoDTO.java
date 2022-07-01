@@ -29,6 +29,7 @@ public class MemoDTO {
 	private String m_mapx;
 	private String m_mapy;
 	private String m_icon;
+	private String m_personal;
 	
 	private String m_up_image;
 }

@@ -139,4 +139,9 @@ public class MemoServiceImplV1 implements MemoService{
 		
 	}
 
+	@Override
+	public List<MemoDTO> findByPersonal(String Personal) {
+		return memoDao.findByPersonal(Personal);
+	}
+
 }
