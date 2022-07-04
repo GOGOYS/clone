@@ -6,16 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<title>Insert title here</title>
-<script>
-	const rootPath = "${rootPath}"
-</script>
-
-<script src="${rootPath}/static/js/memo.js?ver=2022-06-27-007"></script>
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
 
 <style>
 body {
@@ -67,7 +58,7 @@ body {
 			<img src="${rootPath}/static/image/logoWhite.png">
 		</div>
 		<div class="btn">
-			<a href="${rootPath}/memo/memo-map">리스트 보기</a>
+			<a href="${rootPath}/memo/map">리스트 보기</a>
 			<c:if test="${empty USERNAME}">
 				<a href="${rootPath}/user/login">로그인하기</a>
 			</c:if>

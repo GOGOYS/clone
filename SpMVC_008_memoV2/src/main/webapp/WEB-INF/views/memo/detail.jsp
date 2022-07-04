@@ -6,12 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
-<title>Insert title here</title>
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
 <style>
 
 body{
@@ -121,9 +116,9 @@ div.detail-btn-box a:hover{
 					
 	
 		<div class="detail-btn-box">
-			<a href="${rootPath}/memo/memo-map/${MEMO.m_seq}/update">수정</a>
-			<a href="${rootPath}/memo/memo-map/${MEMO.m_seq}/delete">삭제</a>
-			<a href="${rootPath}/memo/memo-map">리스트 보기</a>
+			<a href="${rootPath}/memo/map/${MEMO.m_seq}/update">수정</a>
+			<a href="${rootPath}/memo/map/${MEMO.m_seq}/delete">삭제</a>
+			<a href="${rootPath}/memo/map">리스트 보기</a>
 		</div>
 	</div>
 	

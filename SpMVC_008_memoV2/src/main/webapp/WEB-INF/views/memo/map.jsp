@@ -6,15 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width initial-scale=1.0" />
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=893369622e6174e9707bd86f1b9af909&libraries=services,clusterer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
-<title>간단한 지도 표시하기</title>
-
 <style>
 * {
 	padding: 0;
@@ -276,11 +270,7 @@ div.container-wrap{
 
 div.memo-list-btn svg{
 	margin: 50px 0 0 10px;
-	
 }
-
-
-
 
 </style>
 </head>
@@ -304,18 +294,18 @@ div.memo-list-btn svg{
 	</div>
 	<nav class="icon-memu-bar">
 		<ul class="icon-menu-ul">
-			<li><a href="${rootPath}/memo/memo-map/all">ALL</a></li>
-			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(1).png"><img src="${rootPath}/static/image/goorme(1).png"></a></li>
-			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(2).png"><img src="${rootPath}/static/image/goorme(2).png"></a></li>
-			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(3).png"><img src="${rootPath}/static/image/goorme(3).png"></a></li>
-			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(4).png"><img src="${rootPath}/static/image/goorme(4).png"></a></li>
-			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(5).png"><img src="${rootPath}/static/image/goorme(5).png"></a></li>
-			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(6).png"><img src="${rootPath}/static/image/goorme(6).png"></a></li>
-			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(7).png"><img src="${rootPath}/static/image/goorme(7).png"></a></li>
-			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(8).png"><img src="${rootPath}/static/image/goorme(8).png"></a></li>
-			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(9).png"><img src="${rootPath}/static/image/goorme(9).png"></a></li>
-			<li><a href="${rootPath}/memo/memo-map/find/static/image/goorme(10).png"><img src="${rootPath}/static/image/goorme(10).png"></a></li>
-			<li><a href="${rootPath}/memo/memo-map/public">PUBLIC</a></li>
+			<li><a href="${rootPath}/memo/map/all">ALL</a></li>
+			<li><a href="${rootPath}/memo/map/find/static/image/goorme(1).png"><img src="${rootPath}/static/image/goorme(1).png"></a></li>
+			<li><a href="${rootPath}/memo/map/find/static/image/goorme(2).png"><img src="${rootPath}/static/image/goorme(2).png"></a></li>
+			<li><a href="${rootPath}/memo/map/find/static/image/goorme(3).png"><img src="${rootPath}/static/image/goorme(3).png"></a></li>
+			<li><a href="${rootPath}/memo/map/find/static/image/goorme(4).png"><img src="${rootPath}/static/image/goorme(4).png"></a></li>
+			<li><a href="${rootPath}/memo/map/find/static/image/goorme(5).png"><img src="${rootPath}/static/image/goorme(5).png"></a></li>
+			<li><a href="${rootPath}/memo/map/find/static/image/goorme(6).png"><img src="${rootPath}/static/image/goorme(6).png"></a></li>
+			<li><a href="${rootPath}/memo/map/find/static/image/goorme(7).png"><img src="${rootPath}/static/image/goorme(7).png"></a></li>
+			<li><a href="${rootPath}/memo/map/find/static/image/goorme(8).png"><img src="${rootPath}/static/image/goorme(8).png"></a></li>
+			<li><a href="${rootPath}/memo/map/find/static/image/goorme(9).png"><img src="${rootPath}/static/image/goorme(9).png"></a></li>
+			<li><a href="${rootPath}/memo/map/find/static/image/goorme(10).png"><img src="${rootPath}/static/image/goorme(10).png"></a></li>
+			<li><a href="${rootPath}/memo/map/public">PUBLIC</a></li>
 		</ul>
 	</nav>
 	<form class="input-form" method="POST" enctype="multipart/form-data">
@@ -328,7 +318,7 @@ div.memo-list-btn svg{
 		<input name="m_seq" type="hidden" value='<c:out value="${MEMO.m_seq}" default="0"/>'/>
 		<input id="mapx" name="m_mapx" type="hidden" value=""/> 
 		<input id="mapy" name="m_mapy" type="hidden" value=""/> 			
-		<input name="m_file" type="file" accept="image/*"/>
+		<input name="file" type="file" accept="image/*"/>
 			
 		<div class="input-icon-box">
 			<p>구르미 고르미</p>

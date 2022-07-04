@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.callor.memo.model.MemoDTO;
@@ -25,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping(value="memo/memo-map")
+@RequestMapping(value="memo/map")
 public class MemoController {
 	
 	
@@ -63,7 +64,7 @@ public class MemoController {
 		model.addAttribute("mapY",arrayY);
 		model.addAttribute("MEMOS",memoList);
 		
-		return "/memo/memo-map";
+		return "/memo/map";
 	}
 	
 	@RequestMapping(value={"/public"},method=RequestMethod.GET)
@@ -89,7 +90,7 @@ public class MemoController {
 		model.addAttribute("mapY",arrayY);
 		model.addAttribute("MEMOS",memoList);
 		
-		return "/memo/memo-map";
+		return "/memo/map";
 	}
 	
 	
@@ -98,21 +99,20 @@ public class MemoController {
 	 * form의 file input box의 이름은 절대 VO, DTO에 선언된 이름을 사용하면 안된다.
 	 * 타입이 달라서 400 오류가 뜬다.
 	 */
-	@RequestMapping(value={"","/","all","public"},method=RequestMethod.POST)
-	public String insert(MultipartFile file,@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession) {
+	@RequestMapping(value={"","/","/all","/public"},method=RequestMethod.POST)
+	public String insert(@ModelAttribute("memo") MemoDTO memo,
+			 			 MultipartFile file, HttpSession httpSession) {
 		
 		//메모를 저장하기 전에 현재 session에 저장된 usename을 가져오기
 		String username = (String)httpSession.getAttribute("USERNAME");
 		//저장할 메모 정보에 username 세팅
 		memo.setM_author(username);
+		log.debug(file.getOriginalFilename());
 		
 		
 		memoService.insertAndUpdate(memo, file);
-		log.debug(memo.toString());
-		log.debug("메모 {}", memo.toString());
-		log.debug("파일 {}", file.getOriginalFilename());
 		
-		return "redirect:/memo/memo-map";
+		return "redirect:/memo/map";
 	}	
 	
 	@RequestMapping(value="/{seq}/detail", method=RequestMethod.GET)
@@ -131,7 +131,7 @@ public class MemoController {
 		//전달 받은 seq에 해당하는 데이터 select
 		MemoDTO memo = memoService.findById(Long.valueOf(seq));
 		model.addAttribute("MEMO",memo);
-		return "memo/input";
+		return "memo/update";
 	}
 	
 
@@ -148,13 +148,13 @@ public class MemoController {
 		memoDTO.setM_author(username);
 		memoDTO.setM_seq(m_seq);
 		memoService.insertAndUpdate(memoDTO, file);
-		return String.format("redirect:/memo/memo-map/%s/detail",seq);
+		return String.format("redirect:/memo/map/%s/detail",seq);
 	}
 	
 	@RequestMapping(value="/{seq}/delete",method=RequestMethod.GET)
 	public String delete(@PathVariable("seq") String seq) {
 		memoService.delete(Long.valueOf(seq));
-		return "redirect:/memo/memo-map";
+		return "redirect:/memo/map";
 	}
 	
 	@RequestMapping(value="/find/{static}/{image}/{png:.+}",method=RequestMethod.GET)
@@ -181,7 +181,7 @@ public class MemoController {
 		model.addAttribute("mapX",arrayX);
 		model.addAttribute("mapY",arrayY);
 		model.addAttribute("MEMOS",memoList);
-		return "/memo/memo-map";
+		return "/memo/map";
 		
 	}
 	
@@ -191,6 +191,8 @@ public class MemoController {
 			 			  @PathVariable("png") String png,
 			 			  MultipartFile file,@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession) {
 		
+		String icon = "/"+ root + "/"+ image + "/" +png;
+		
 		//메모를 저장하기 전에 현재 session에 저장된 usename을 가져오기
 		String username = (String)httpSession.getAttribute("USERNAME");
 		//저장할 메모 정보에 username 세팅
@@ -198,11 +200,8 @@ public class MemoController {
 		
 		
 		memoService.insertAndUpdate(memo, file);
-		log.debug(memo.toString());
-		log.debug("메모 {}", memo.toString());
-		log.debug("파일 {}", file.getOriginalFilename());
 		
-		return "redirect:/memo/memo-map";
+		return "redirect:/memo/map/find"+icon;
 	}	
 	
 	@ModelAttribute("memo")
