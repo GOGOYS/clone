@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       seq 값이 정상적인 범위 값일때만 detail로 점프하기
     */
     if(seq){
-      document.location.href = `${rootPath}/memo/memo-map/${seq}/detail`;
+      document.location.href = `${rootPath}/memo/map/detail/${seq}`;
     }
   });
 });

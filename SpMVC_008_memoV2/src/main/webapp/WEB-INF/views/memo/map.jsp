@@ -93,6 +93,15 @@ nav.icon-memu-bar ul li a:first-child{
 	text-decoration: none;
 }
 
+div.weather-today{
+	position:fixed;
+	top:20px;
+	left: 1120px;
+	background-color: #fff;
+	width:200px;
+	height: 56px;
+}
+
 .input-form{
 	width:500px;
 	height: 580px;
@@ -307,6 +316,11 @@ div.memo-list-btn svg{
 			<li><a href="${rootPath}/memo/map/find/static/image/goorme(10).png"><img src="${rootPath}/static/image/goorme(10).png"></a></li>
 			<li><a href="${rootPath}/memo/map/public">PUBLIC</a></li>
 		</ul>
+		<div class="weather-today">
+			<div class="weather-title">오늘의 날씨</div>
+			<%-- <div class="weather-state">${WEATHER.wfCd}</div>
+			<div class="weather-form">${WEATHER.rnYn}</div> --%>
+		</div>
 	</nav>
 	<form class="input-form" method="POST" enctype="multipart/form-data">
 		<div class="input-info">
@@ -461,5 +475,5 @@ div.memo-list-btn svg{
 		
 	
 	</script>
-	<script src="${rootPath}/static/js/memo.js?ver=2022-06-30-004"></script>
+	<script src="${rootPath}/static/js/memo.js?ver=2022-07-11-003"></script>
 </html>

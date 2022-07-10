@@ -1,5 +1,6 @@
 package com.callor.memo.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,7 +9,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.callor.memo.model.MemoDTO;
+import com.callor.memo.model.WeatherVO;
 import com.callor.memo.service.MemoService;
+import com.callor.memo.service.WeatherService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,9 +33,11 @@ public class MemoController {
 	
 	@Autowired
 	private MemoService memoService;
+	@Autowired
+	private WeatherService weatherService;
 	
 	@RequestMapping(value={"","/","/all"},method=RequestMethod.GET)
-	public String map(@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession, Model model) {
+	public String map(@ModelAttribute("memo") MemoDTO memo, HttpSession httpSession, Model model)throws IOException  {
 		
 		String username = (String) httpSession.getAttribute("USERNAME");
 		
@@ -63,6 +66,14 @@ public class MemoController {
 		model.addAttribute("mapX",arrayX);
 		model.addAttribute("mapY",arrayY);
 		model.addAttribute("MEMOS",memoList);
+		
+		
+		List<WeatherVO> weatherVO = weatherService.getWeather();
+		String weather = (String)weatherVO.toString();
+		log.debug(weather);
+		
+		model.addAttribute("WEATHER",weatherVO);
+		
 		
 		return "/memo/map";
 	}
@@ -115,7 +126,7 @@ public class MemoController {
 		return "redirect:/memo/map";
 	}	
 	
-	@RequestMapping(value="/{seq}/detail", method=RequestMethod.GET)
+	@RequestMapping(value="/detail/${seq}", method=RequestMethod.GET)
 	public String detail(@PathVariable("seq") String seq, @ModelAttribute("memo") MemoDTO memo, Model model) {
 		
 		long m_seq = Long.valueOf(seq);
