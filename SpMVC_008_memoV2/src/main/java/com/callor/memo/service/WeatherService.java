@@ -7,5 +7,6 @@ import com.callor.memo.model.WeatherVO;
 
 public interface WeatherService {
 	
-	public List<WeatherVO> getWeather() throws IOException;
+	public WeatherVO getWeather() throws IOException;
+	public String getRNYN(WeatherVO weatherVO);
 }

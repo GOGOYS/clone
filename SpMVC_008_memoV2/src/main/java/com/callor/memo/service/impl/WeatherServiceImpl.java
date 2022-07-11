@@ -3,11 +3,9 @@ package com.callor.memo.service.impl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,8 +15,7 @@ import org.springframework.stereotype.Service;
 import com.callor.memo.config.Config;
 import com.callor.memo.model.WeatherVO;
 import com.callor.memo.service.WeatherService;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class WeatherServiceImpl implements WeatherService{
 
 	@Override
-	public List<WeatherVO> getWeather() throws IOException {
+	public WeatherVO getWeather() throws IOException {
 		// TODO Auto-generated method stub
 		
 		String url = "http://apis.data.go.kr/1360000/VilageFcstMsgService/getLandFcst";
@@ -80,12 +77,32 @@ public class WeatherServiceImpl implements WeatherService{
         
         //item은 배열로 생성
         JSONArray item = items.getJSONArray("item");
-//        // log.debug(item.toString(4));
-      
-        //json 배열을 List형으로 변형해서 VO에 저장
-        Gson gson = new Gson();
-        List<WeatherVO> list = gson.fromJson(item.toString(), new TypeToken<List<WeatherVO>>(){}.getType());
-		return list;
+        JSONObject it = item.getJSONObject(0);
+        String itto = it.toString();
+        
+        ObjectMapper mapper = new ObjectMapper();
+        WeatherVO weatherVO = mapper.readValue(itto, WeatherVO.class);
+
+		return weatherVO;
+	}
+
+
+	@Override
+	public String getRNYN(WeatherVO weatherVO) {
+		String rnYn = weatherVO.rnYn;
+		if(rnYn.equals("0")) {
+			return "강수없음";
+		}else if(rnYn.equals("1")) {
+			return "비";
+		}else if(rnYn.equals("2")) {
+			return "비/눈";
+		}else if(rnYn.equals("3")) {
+			return "눈";
+		}else if(rnYn.equals("4")) {
+			return "소나기";
+		}else {
+			return "오류";
+		}
 	}
 
 }

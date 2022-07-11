@@ -55,7 +55,7 @@ nav.menu-bar li a:hover{
 nav.icon-memu-bar{
 	position: fixed;
 	top: 20px;
-	left: 160px;
+	left: 140px;
 	width:910px;
 	height: 56px;
 	background-color: #fff;
@@ -98,8 +98,9 @@ div.weather-today{
 	top:20px;
 	left: 1120px;
 	background-color: #fff;
-	width:200px;
+	width:120px;
 	height: 56px;
+	border-radius: 8px;
 }
 
 .input-form{
@@ -318,8 +319,23 @@ div.memo-list-btn svg{
 		</ul>
 		<div class="weather-today">
 			<div class="weather-title">오늘의 날씨</div>
-			<%-- <div class="weather-state">${WEATHER.wfCd}</div>
-			<div class="weather-form">${WEATHER.rnYn}</div> --%>
+			<c:choose>
+			<c:when test="${rnYn eq'강수없음'}">
+				<div class="weather-form"><i class="fa-solid fa-sun"></i></div>
+			</c:when>
+			<c:when test="${rnYn eq '비'}">
+				<div class="weather-form"><i class="fa-solid fa-cloud-showers"></i></div>
+			</c:when>
+			<c:when test="${rnYn eq '비/눈'}">
+				<div class="weather-form"><i class="fa-solid fa-cloud-hail-mixed"></i></div>
+			</c:when>
+			<c:when test="${rnYn eq '눈'}">
+				<div class="weather-form"><i class="fa-solid fa-sun"></i></div>
+			</c:when>
+			<c:when test="${rnYn eq '소나기'}">
+				<div class="weather-form"><i class="fa-solid fa-snowflake"></i></div>
+			</c:when>
+			</c:choose>
 		</div>
 	</nav>
 	<form class="input-form" method="POST" enctype="multipart/form-data">
