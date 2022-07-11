@@ -57,3 +57,7 @@ jsp에서 핸들링을 하면 서버가 무거워지고 보안에 취약함 MVC2
 return하면 .jsp파일을 rendering하여 응답하는
 @ResponseBody가 부착된 controller의 method에서
 문자열을 직접 클라이언트에게 전달하는 것
+
+* 한글 인코딩이 깨지면
+ @RequestMapping에 produces="text/html;charset=UFT-8" 붙여넣으면
+ 한글 인코딩을 해서 보낼 수 있다.
