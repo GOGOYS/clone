@@ -96,11 +96,27 @@ nav.icon-memu-bar ul li a:first-child{
 div.weather-today{
 	position:fixed;
 	top:20px;
-	left: 1120px;
+	left: 1080px;
 	background-color: #fff;
-	width:120px;
-	height: 56px;
+	width:152px;
+	height: 44px;
 	border-radius: 8px;
+	display: flex;
+}
+div.weather-title{
+	margin: 10px 0 10px 16px;
+	display: inline-block;
+	color: #45AFFF;
+	font-weight: 900;
+}
+
+div.weather-icon{
+	margin: 10px 0 10px 10px;
+	display: inline-block;
+}
+
+.fa-sun{
+	color: #ff4824;
 }
 
 .input-form{
@@ -318,22 +334,22 @@ div.memo-list-btn svg{
 			<li><a href="${rootPath}/memo/map/public">PUBLIC</a></li>
 		</ul>
 		<div class="weather-today">
-			<div class="weather-title">오늘의 날씨</div>
+			<div class="weather-title">오늘의 날씨 :</div>
 			<c:choose>
 			<c:when test="${rnYn eq'강수없음'}">
-				<div class="weather-form"><i class="fa-solid fa-sun"></i></div>
+				<div class="weather-icon"><i class="fa-solid fa-sun"></i></div>
 			</c:when>
 			<c:when test="${rnYn eq '비'}">
-				<div class="weather-form"><i class="fa-solid fa-cloud-showers"></i></div>
+				<div class="weather-icon"><i class="fa-solid fa-cloud-showers"></i></div>
 			</c:when>
 			<c:when test="${rnYn eq '비/눈'}">
-				<div class="weather-form"><i class="fa-solid fa-cloud-hail-mixed"></i></div>
+				<div class="weather-icon"><i class="fa-solid fa-cloud-hail-mixed"></i></div>
 			</c:when>
 			<c:when test="${rnYn eq '눈'}">
-				<div class="weather-form"><i class="fa-solid fa-sun"></i></div>
+				<div class="weather-icon"><i class="fa-solid fa-sun"></i></div>
 			</c:when>
 			<c:when test="${rnYn eq '소나기'}">
-				<div class="weather-form"><i class="fa-solid fa-snowflake"></i></div>
+				<div class="weather-icon"><i class="fa-solid fa-snowflake"></i></div>
 			</c:when>
 			</c:choose>
 		</div>
