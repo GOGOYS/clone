@@ -103,6 +103,26 @@ div.detail-btn-box a:hover{
 			</div>
 			<div class="detail-inner2">
 				<div class="detail-title">${MEMO.m_title}</div>
+				<div>
+					<p>날씨 :</p>
+					<c:choose>
+						<c:when test="${MEMO.m_weather eq'강수없음'}">
+							<div class="weather-icon"><i class="fa-solid fa-sun"></i></div>
+						</c:when>
+						<c:when test="${MEMO.m_weather eq '비'}">
+							<div class="weather-icon"><i class="fa-solid fa-cloud-showers"></i></div>
+						</c:when>
+						<c:when test="${MEMO.m_weather eq '비/눈'}">
+							<div class="weather-icon"><i class="fa-solid fa-cloud-hail-mixed"></i></div>
+						</c:when>
+						<c:when test="${MEMO.m_weather eq '눈'}">
+							<div class="weather-icon"><i class="fa-solid fa-sun"></i></div>
+						</c:when>
+						<c:when test="${MEMO.m_weather eq '소나기'}">
+							<div class="weather-icon"><i class="fa-solid fa-snowflake"></i></div>
+						</c:when>
+					</c:choose>
+				</div>
 				<div class="detail-date"><i class="fa-solid fa-calendar"></i> ${MEMO.m_date} ${MEMO.m_time}</div>
 			</div>
 					<c:if test="${not empty MEMO.m_image}">
@@ -113,8 +133,6 @@ div.detail-btn-box a:hover{
 					</c:if>
 			<div class="detail-content">${MEMO.m_memo}</div>
 		</div>
-					
-	
 		<div class="detail-btn-box">
 			<a href="${rootPath}/memo/map/${MEMO.m_seq}/update">수정</a>
 			<a href="${rootPath}/memo/map/${MEMO.m_seq}/delete">삭제</a>

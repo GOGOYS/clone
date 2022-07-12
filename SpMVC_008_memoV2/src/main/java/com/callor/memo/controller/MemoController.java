@@ -124,7 +124,7 @@ public class MemoController {
 		return "redirect:/memo/map";
 	}	
 	
-	@RequestMapping(value="/detail/${seq}", method=RequestMethod.GET)
+	@RequestMapping(value="/detail/{seq}", method=RequestMethod.GET)
 	public String detail(@PathVariable("seq") String seq, @ModelAttribute("memo") MemoDTO memo, Model model) {
 		
 		long m_seq = Long.valueOf(seq);

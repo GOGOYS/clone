@@ -303,6 +303,7 @@ div.memo-list-btn svg{
 <body>
 	<div class="container">
 		<header>
+			<!-- 왼쪽 사이드 메뉴 -->
 			<div class="logoBlue">
 				<img src="${rootPath}/static/image/logoWhite.png">
 			</div>
@@ -318,6 +319,7 @@ div.memo-list-btn svg{
 		
 		<div id="map" style="width:100vw;height:100vh;"></div>
 	</div>
+	<!--  구르미 아이콘 -->
 	<nav class="icon-memu-bar">
 		<ul class="icon-menu-ul">
 			<li><a href="${rootPath}/memo/map/all">ALL</a></li>
@@ -333,6 +335,8 @@ div.memo-list-btn svg{
 			<li><a href="${rootPath}/memo/map/find/static/image/goorme(10).png"><img src="${rootPath}/static/image/goorme(10).png"></a></li>
 			<li><a href="${rootPath}/memo/map/public">PUBLIC</a></li>
 		</ul>
+		
+		<!-- 날씨 정보 -->
 		<div class="weather-today">
 			<div class="weather-title">오늘의 날씨 :</div>
 			<c:choose>
@@ -354,6 +358,8 @@ div.memo-list-btn svg{
 			</c:choose>
 		</div>
 	</nav>
+	
+	<!-- insert 창 -->
 	<form class="input-form" method="POST" enctype="multipart/form-data">
 		<div class="input-info">
 			<p>${USERNAME}님의 구르미</p>
@@ -362,6 +368,7 @@ div.memo-list-btn svg{
 		<input name="m_title" placeholder="제목을 입력하세요" value="${MEMO.m_title}">
 		<textarea name="m_memo" placeholder="메모를 입력하세요" cols="69" rows="16">${MEMO.m_memo}</textarea> 
 		<input name="m_seq" type="hidden" value='<c:out value="${MEMO.m_seq}" default="0"/>'/>
+		<input name="m_weather" type="hidden" value="${rnYn}"/>
 		<input id="mapx" name="m_mapx" type="hidden" value=""/> 
 		<input id="mapy" name="m_mapy" type="hidden" value=""/> 			
 		<input name="file" type="file" accept="image/*"/>
@@ -385,6 +392,8 @@ div.memo-list-btn svg{
 			<input type="radio" name="m_personal" id="personal-no" value="NO" checked="checked"/><label for="personal-no">비공개</label>
 		</div>
 	</form>
+	
+	<!-- 오른쪽 메모 리스트 창 -->
 	<div class="container-wrap">
 		<div class="memo-list-slide">
 			<div class="slide-home"> <a href="${rootPath}/"><i class="fa-solid fa-house"></i></a></div>
@@ -507,5 +516,5 @@ div.memo-list-btn svg{
 		
 	
 	</script>
-	<script src="${rootPath}/static/js/memo.js?ver=2022-07-11-003"></script>
+	<script src="${rootPath}/static/js/memo.js?ver=2022-07-11-005"></script>
 </html>
