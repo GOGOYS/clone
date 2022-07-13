@@ -42,9 +42,15 @@
 </style>
 </head>
 <body>
-	<form method="POST">
-		<input name="username" placeholder="USERNAME 입력 후 ENTER">
-	</form>
-
+	<div class="login-box">
+		<div>
+			<h1>로그인</h1>	
+		</div>	
+		<form method="POST">
+			<input name="u_username" placeholder="USERNAME">
+			<input name="username" placeholder="PASSWORD">
+			<button>로그인</button>
+		</form>
+	</div>
 </body>
 </html>

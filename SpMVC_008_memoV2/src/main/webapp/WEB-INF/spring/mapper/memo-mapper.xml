@@ -17,7 +17,6 @@
  		SELECT * FROM tbl_memos
  		WHERE m_author = #{m_author}
  	</select>
- 	
  	<select id="findByIcon" resultType="MemoDTO">
  		SELECT * FROM tbl_memos
  		WHERE m_icon = #{m_icon}
@@ -91,6 +90,25 @@
  			m_mapy VARCHAR(15), 
  			m_icon VARCHAR(40) ,
  			m_personal VARCHAR(5)
+ 		)
+ 	</select>
+ 	<select id="create_user_table">
+ 		CREATE TABLE IF NOT EXISTS tbl_users(
+ 			u_seq BIGINT PRIMARY KEY AUTO_INCREMENT,
+ 			u_userid VARCHAR(20) NOT NULL UNIQUE,
+ 			u_password VARCHAR(20) NOT NULL,
+ 			u_email VARCHAR(30) NOT NULL UNIQUE,
+ 			u_name VARCHAR(8) NOT NULL UNIQUE,
+ 			u_image VARCHAR(125),
+ 			u_up_image VARCHAR(125),
+ 			u_role VARCHAR(5) NOT NULL
+ 		)
+ 	</select>
+ 	<select id="create_follow_table">
+ 		CREATE TABLE IF NOT EXISTS tbl_follow(
+ 			u_seq BIGINT PRIMARY KEY AUTO_INCREMENT,
+ 			u_from_user VARCHAR(20) NOT NULL,
+ 			u_to_user VARCHAR(20) NOT NULL,
  		)
  	</select>
  
