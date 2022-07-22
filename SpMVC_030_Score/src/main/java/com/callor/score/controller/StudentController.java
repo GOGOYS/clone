@@ -23,6 +23,8 @@ public class StudentController {
 		this.studentService = studentService;
 	}
 	
+	//JSON Type으로 return
+	// 학생 리스트를 return하기 위해 public List<StudentVO> home()   
 	@ResponseBody
 	@RequestMapping(value={"/",""},method=RequestMethod.GET)
 	public List<StudentVO> home() {

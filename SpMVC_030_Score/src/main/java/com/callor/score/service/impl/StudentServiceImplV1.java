@@ -26,25 +26,25 @@ public class StudentServiceImplV1 implements StudentService{
 	@Override
 	public StudentVO findById(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return studentDao.findById(id);
 	}
 
 	@Override
 	public int insert(StudentVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return studentDao.insert(vo);
 	}
 
 	@Override
 	public int update(StudentVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return studentDao.update(vo);
 	}
 
 	@Override
 	public int delete(String id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return studentDao.delete(id);
 	}
 
 }
