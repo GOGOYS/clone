@@ -2,19 +2,21 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set value="${pageContext.request.contextPath}" var="rootPath" />
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
     
 <!DOCTYPE html>
 <html>
 <head>
-	<tiles:insertAttribute name="head"/>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-	<tiles:insertAttribute name="header"/>
-	<tiles:insertAttribute name="content"/>
-	
-	<footer>
-		<address>CopyRight &copy; qaz75301@naver.com</address>
-	</footer>
+	<div>
+		<div>${STVO.st_num}</div>
+		<div>${STVO.st_name}</div>
+		<div>${STVO.st_dept}</div>
+		<div>${STVO.st_tel}</div>
+		<div>${STVO.st_addr}</div>
+	</div>
+
 </body>
 </html>
