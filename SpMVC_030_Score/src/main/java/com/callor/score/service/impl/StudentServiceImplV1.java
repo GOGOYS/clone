@@ -47,4 +47,10 @@ public class StudentServiceImplV1 implements StudentService{
 		return studentDao.delete(id);
 	}
 
+	@Override
+	public StudentVO studentScore(String st_num) {
+		// TODO Auto-generated method stub
+		return studentDao.studentScore(st_num);
+	}
+
 }

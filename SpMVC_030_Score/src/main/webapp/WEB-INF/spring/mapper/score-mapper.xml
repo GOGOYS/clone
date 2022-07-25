@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="com.callor.score.persistance.ScoreDao">
+ 
+ 	<select id="selectAll" resultType="ScoreVO">
+ 		SELECT * FROM tbl_score
+ 	</select>
+ 	<select id="findById" resultType="ScoreVO">
+ 		SELECT * FROM tbl_score
+ 		WHERE sc_seq = #{sc_seq}
+ 	</select>
+ 	<select id="findByStNum" resultType="ScoreVO">
+ 		SELECT * FROM tbl_score
+ 			LEFT JOIN tbl_subject
+ 				ON sc_sbcode = sb_code
+ 		WHERE sc_stnum = #{sc_stnum}
+ 	</select>
+ 	<insert id="insert" parameterType="ScoreVO">
+ 		INSERT INTO tbl_score(
+ 			sc_seq,
+	sc_stnum,
+	sc_sbcode,
+	sc_score
+ 		) VALUES(
+ 			#{sc_seq},
+			#{sc_stnum},
+			#{sc_sbcode},
+			#{sc_score}
+ 		)
+ 	</insert>
+ 	<update id="update">
+
+ 	</update>
+ 	<delete id="delete">
+
+ 	</delete>
+ 
+ </mapper> 

@@ -11,7 +11,7 @@
 		
 		<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
 			<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-			<property name="url" value="jdbc:mysql://localhost:3306/mydb"/>
+			<property name="url" value="jdbc:mysql://localhost:3306/schooldb"/>
 			<property name="username" value="GOGO"/>
 			<property name="password" value="!Korea8080"/>
 		</bean>
