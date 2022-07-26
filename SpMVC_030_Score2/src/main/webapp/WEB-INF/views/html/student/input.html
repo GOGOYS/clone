@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<th:block layout:fragment="content">
+<style>
+	form.student.input{
+		width: 80%;
+		margin:20px auto;
+	}
+	form.student.input div{
+		display: flex;
+	}
+	form.student.input input
+	form.student.input button{
+		flex: 1;
+		padding: 16px 12px;
+		margin: 5px;
+	}
+</style>    
+
+<!-- th:field를 사용하면 자동으로 id, name, value 값을 지정해준다 {}의 이름으로 지정 -->
+<form method="POST" class="student input" th:object="${STVO}">
+	<div>
+		<input th:field="*{st_name}"/>
+	</div>
+	<div>	
+		<input th:field="*{st_dept}"/>
+	</div>
+	<div>
+		<input th:field="*{st_tel}"/>
+	</div>
+	<div>
+		<input th:field="*{st_addr}"/>
+	</div>
+	<div>
+		<button type="submit" >저장</button>
+	</div>		
+</form>
+</th:block>
+

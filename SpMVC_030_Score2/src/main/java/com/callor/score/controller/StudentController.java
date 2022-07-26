@@ -77,6 +77,48 @@ public class StudentController {
 		return retStr;
 	}
 	
+	@RequestMapping(value="/update_score",method=RequestMethod.GET)
+	public String updateScore(String st_num,Model model) {
+		StudentVO stVO = studentService.findById(st_num);
+		
+		List<ScoreVO> scList = stVO.getScoreList();
+		
+		model.addAttribute("STVO",stVO);
+		return "student/input_score";
+	}
+	@RequestMapping(value="/update_score",method=RequestMethod.POST)
+	public String updateScore(String st_num,
+			String kor,
+			String db, 
+			String art, 
+			String soft, 
+			String math, 
+			String eng,
+			String music,Model model) {
+		
+		StudentVO stVO = studentService.findById(st_num);
+		List<ScoreVO> scList = stVO.getScoreList();
+		
+		scList.get(0).setSc_score(kor);
+		scoreService.update(scList.get(0));
+		scList.get(1).setSc_score(db);
+		scoreService.update(scList.get(1));
+		scList.get(2).setSc_score(art);
+		scoreService.update(scList.get(2));
+		scList.get(3).setSc_score(soft);
+		scoreService.update(scList.get(3));
+		scList.get(4).setSc_score(math);
+		scoreService.update(scList.get(4));
+		scList.get(5).setSc_score(eng);
+		scoreService.update(scList.get(5));
+		scList.get(6).setSc_score(music);
+		scoreService.update(scList.get(6));
+
+		
+		model.addAttribute("STVO",stVO);
+		return "redirect:/student";
+	}
+	
 	//JSON Type으로 return
 		// 학생 리스트를 return하기 위해 public List<StudentVO> home()   
 	@ResponseBody

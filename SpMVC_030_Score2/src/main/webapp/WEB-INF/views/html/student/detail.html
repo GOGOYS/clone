@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+ <th:block layout:fragment="content">
+	<div class="student detail-body">
+		<div>학번 : </div><div class="student datail" th:text="${STVO.st_num}"></div>
+	</div>
+	<div class="student detail-body">
+		<div>이름 : </div><div class="student datail" th:text="${STVO.st_name}"></div>
+	</div>
+	<div class="student detail-body">
+		<div>학과 : </div><div class="student datail" th:text="${STVO.st_dept}"></div>
+	</div>
+	<div class="student detail-body">
+		<div>전번 : </div><div class="student datail" th:text="${STVO.st_tel}"></div>
+	</div>
+	<div class="student detail-body">
+		<div>주소 : </div><div class="student datail" th:text="${STVO.st_addr}"></div>
+	</div>
+		
+		<!--  데이터의 값을 문자열로 표시하고 싶을때 앞뒤로 ||를 넣어주면 
+			데이터를 문자열로 변환시켜 준다--> 
+	<div class="student detail-body" th:each="SCORE : ${STVO.scoreList}">
+		<div th:text="|${SCORE.sb_name} : ${SCORE.sc_score}|"></div>
+	</div>
+	
+	<div>
+		<!--값을 보낼때는 ? 대신 () 안에 넢어서 보낸다  -->
+		<a th:href="@{/student/update(st_num=${STVO.st_num})}">학생정보 수정하기</a>
+		<a th:href="@{/score/update(st_num=${STVO.st_num})}">학생성적 수정하기</a>
+		<a th:href="@{/student}">리스트가기</a>
+	</div>
+</th:block>

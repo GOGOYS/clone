@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+ <th:block layout:fragment="content">
+	<div class="student detail-body">
+		<div>학번 : </div><div class="student datail" th:text="${STVO.st_num}"></div>
+	</div>
+	<div class="student detail-body">
+		<div>이름 : </div><div class="student datail" th:text="${STVO.st_name}"></div>
+	</div>
+	<div class="student detail-body">
+		<div>학과 : </div><div class="student datail" th:text="${STVO.st_dept}"></div>
+	</div>
+	<div class="student detail-body">
+		<div>전번 : </div><div class="student datail" th:text="${STVO.st_tel}"></div>
+	</div>
+	<div class="student detail-body">
+		<div>주소 : </div><div class="student datail" th:text="${STVO.st_addr}"></div>
+	</div>
+		
+		<!--  데이터의 값을 문자열로 표시하고 싶을때 앞뒤로 ||를 넣어주면 
+			데이터를 문자열로 변환시켜 준다-->
+	<style>
+		form.score-input{
+			width:80%;
+			margin: 10px auto;
+		}
+		
+		div.score-input-list{
+			display: flex;
+			width: 90%;
+		}
+		
+		div.score-input-list input,
+		div.score-input-list div{
+			flex: 1;
+			margin: 5px;
+			padding: 8px;
+		}
+	</style> 
+	<form method="POST" class="score-input">
+		<div th:each="SCORE : ${STVO.scoreList}" th:object="${SCORE}" class="score-input-list">
+			<input th:value="*{sc_sbcode}" name="sb_code" readonly="readonly">
+			<div th:text ="*{sb_name}"></div>
+			<input th:value="*{sc_score}" name="sc_score">
+		</div>
+		<button>저장</button>
+	</form>
+	
+</th:block>
