@@ -13,7 +13,7 @@
  	</select>
  	<insert id="insert" parameterType="UserVO">
  		INSERT INTO tbl_users(username, password, enabled)
- 		VALUES(#{username}, #{password}, #{enabled)
+ 		VALUES(#{username}, #{password}, #{enabled})
  	</insert>
  	<update id="update"></update>
  	<delete id="delete"></delete>
