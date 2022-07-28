@@ -1,14 +1,11 @@
 package com.callor.score.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.callor.score.model.ScoreUpdateVO;
 import com.callor.score.model.StudentVO;
 import com.callor.score.service.ScoreService;
 import com.callor.score.service.StudentService;
@@ -42,6 +39,16 @@ public class ScoreController {
 	 * 컨트롤러에서 문자열 배열로 데이터를 받는다
 	 */
 	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public String update(ScoreUpdateVO score) {
+		log.debug(score.toString());
+		
+		scService.updateScore(score);
+		return "redirect:/student/detail_st_num" +score.getSt_num();
+	}
+	
+	
+	
+	
 	public String update(String st_num, String [] sb_code, String [] sc_score) {
 		
 		for(int i = 0; i  < sb_code.length; i++) {

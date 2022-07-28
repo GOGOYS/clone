@@ -24,12 +24,25 @@ import lombok.ToString;
 @Builder
 public class UserVO implements UserDetails{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -194516452377043730L;
 	private String username;
 	private String password;
-	private boolean isAccountNonExpired;
-	private boolean isAccountNotLocked;
-	private boolean isCredentailsNonExpired;
+	private boolean enabled;
+	private boolean accountNonExpired;
+	private boolean accountNonLocked;
+	private boolean credentialsNonExpired;
 	
-	private Collection<? extends GrantedAuthority> authorites;
+	//GrantedAuthority라는 타입으로 List의 상위형인 Collection에 저장
+	private Collection<? extends GrantedAuthority> authorities;
+	private String email;
+	private String tel;
+	private String realname;
+	private String nickname;
+
+
+
 
 }

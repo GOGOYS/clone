@@ -8,10 +8,11 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/jdbc https://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd">
-		
+		<!-- ?allowMultiQueries=true : 업데이트를 동시 수행하기 위해서 넣어야하는 코드 -->
 		<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
 			<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-			<property name="url" value="jdbc:mysql://localhost:3306/schooldb"/>
+			<property name="url" 
+				value="jdbc:mysql://localhost:3306/schooldb?allowMultiQueries=true"/>
 			<property name="username" value="GOGO"/>
 			<property name="password" value="!Korea8080"/>
 		</bean>
