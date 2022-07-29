@@ -52,7 +52,7 @@
 <nav>
 	<ul>
 		<li><a href="${rootPath}/">Home</a></li>
-		<li><a href="${rootPath}/user/loin">로그인</a></li>
+		<li><a href="${rootPath}/user/login">로그인</a></li>
 		<li><a href="${rootPath}/user/join">회원가입</a></li>
 		<sec:authorize access="isAuthenticated()">
 			<li class="logout">로그아웃</li>
@@ -61,8 +61,9 @@
 			</sec:authorize>
 		</sec:authorize>
 		
-		<sec:authorize access="hasRole('ROLE_ADMIN')"></sec:authorize>
-		<li><a href="${rootPath}/admin">관리자</a></li>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<li><a href="${rootPath}/admin">관리자</a></li>
+		</sec:authorize>
 	</ul>
 </nav>
 
@@ -74,18 +75,35 @@
 		<c:when test="${LAYOUT == 'JOIN'}">
 			<%@ include file="/WEB-INF/views/user/join.jsp" %>
 		</c:when>
+		<c:when test="${LAYOUT == 'MYPAGE'}">
+			<%@ include file="/WEB-INF/views/user/mypage.jsp" %>
+		</c:when>
+		<c:when test="${LAYOUT == 'UPDATE'}">
+			<%@ include file="/WEB-INF/views/user/update.jsp" %>
+		</c:when>
+		<c:when test="${LAYOUT == 'ADMINPAGE'}">
+			<%@ include file="/WEB-INF/views/admin/page.jsp" %>
+		</c:when>
+		<c:when test="${LAYOUT == 'ADMINUPDATE'}">
+			<%@ include file="/WEB-INF/views/admin/userupdate.jsp" %>
+		</c:when>
 		<c:otherwise>
-		<h1>여기는 홈 화면 입니다</h1></c:otherwise>
+			<h1>여기는 홈 화면 입니다</h1>
+		</c:otherwise>
 	</c:choose>
 </section>
 
 	<form:form id="logout-form" action="${rootPath}/logout" method="POST"/>
 
 </body>
+<script src="${rootPath}/static/js/admin.js?ver=2022-07-29-004"></script>
+<script>
+	const rootPath = "${rootPath}";
+</script>
 
 <script>
-	dodument.querySelector("form#logout")?.addEventListener("click",()=>{
-		dodument.querySelector("form#logout-from")
+	document.querySelector("li.logout")?.addEventListener("click",()=>{
+		document.querySelector("form#logout-form")?.submit()
 	})
 </script>
 </html>

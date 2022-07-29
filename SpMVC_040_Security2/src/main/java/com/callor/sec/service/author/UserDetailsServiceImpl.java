@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.callor.sec.model.AuthorityVO;
@@ -25,10 +26,12 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	
 	private final UserDao userDao;
 	
+
 	public UserDetailsServiceImpl(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
+
+
 	/*
 	 * 로그인한 사용자의 username를 매개변수로 전달받아
 	 * UserDal 를 통해 로그인한 정보를 DB로 부터 가져온다

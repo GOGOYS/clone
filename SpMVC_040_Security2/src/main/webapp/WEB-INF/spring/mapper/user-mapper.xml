@@ -12,10 +12,31 @@
  		SELECT * FROM tbl_users WHERE username=#{username}
  	</select>
  	<insert id="insert" parameterType="UserVO">
- 		INSERT INTO tbl_users(username, password, enabled)
- 		VALUES(#{username}, #{password}, #{enabled})
+ 		INSERT INTO tbl_users(
+ 			username,
+ 			password,
+ 			enabled,
+ 			realname,
+ 			nickname,
+ 			tel
+ 		)VALUES(
+ 			#{username},
+ 			#{password},
+ 			#{enabled},
+ 			#{realname},
+ 			#{nickname},
+ 			#{tel}
+ 			)
  	</insert>
- 	<update id="update"></update>
+ 	<update id="update">
+ 		UPDATE tbl_users
+ 			SET password = #{password},
+ 				email = #{email},
+ 				realname = #{realname},
+ 				nickname = #{nickname},
+ 				tel = #{tel}
+ 		WHERE username = #{username}
+ 	</update>
  	<delete id="delete"></delete>
  	
  	<select id="roleSelect" resultType="AuthorityVO">
@@ -38,7 +59,7 @@
  	<select id="create_user_table">
 	 	CREATE TABLE IF NOT EXISTS tbl_users(
 			username VARCHAR(20) PRIMARY KEY,
-			password VARCHAR(20) NOT NULL,
+			password VARCHAR(255) NOT NULL,
 			enabled BOOLEAN DEFAULT FALSE,
 			accountNonExpired BOOLEAN DEFAULT TRUE,
 			accountNonLocked BOOLEAN DEFAULT TRUE,
