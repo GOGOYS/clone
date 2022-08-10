@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,8 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value="/user")
 public class UserController {
 	
+	//localhost:8080/context/user/login
+	//security에서는 login은 GET만 있고 POST는 만들지 않는다. 알아서 처리해줌
 	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public String login() {
+	public String login(String error,Model model) {
+		model.addAttribute("error",error);
 		return "/user/login";
 	}
 	

@@ -15,7 +15,7 @@
 	<h1>나.투.리</h1>
 	<sec:authorize access="isAnonymous()">
 		<h3>
-			<a href="${rootPath}/login">로그인</a>
+			<a href="${rootPath}/user/login">로그인</a>
 		</h3>
 		<h3>
 			<a href="${rootPath}/user/join">회원가입</a>
